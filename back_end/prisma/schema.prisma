@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  firstname String
+  lastname  String
+  password  String
+  createdat DateTime @default(now())
+  folders   Folder[]
+  files     File[]
+}
+
+model Folder {
+  id           Int      @id @default(autoincrement())
+  ownerid      Int
+  name         String
+  owner        User     @relation(fields: [ownerid], references: [id])
+  subfolders   Folder[] @relation("folderHierarchy")
+  parentfolder Folder?  @relation("folderHierarchy", fields: [parentid], references: [id], onDelete: Cascade)
+  parentid     Int?
+  files        File[]
+}
+
+model File {
+  id        Int      @id @default(autoincrement())
+  name      String
+  url       String   @unique
+  size      Int
+  mimetype  String?
+  createdat DateTime @default(now())
+  updatedat DateTime @updatedAt
+  folder    Folder   @relation(fields: [folderid], references: [id])
+  owner     User     @relation(fields: [ownerid], references: [id])
+  ownerid   Int
+  folderid  Int
+}
