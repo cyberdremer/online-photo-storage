@@ -1,6 +1,6 @@
 import { Strategy } from "passport-local";
 import bcrypt from "bcryptjs";
-import prisma from "../prisma-client/prismainstance";
+import prisma from "../prisma-client/prismainstance.js";
 
 const localStrategy = new Strategy(async (username, password, done) => {
   try {

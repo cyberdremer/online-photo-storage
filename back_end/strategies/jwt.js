@@ -1,15 +1,15 @@
 import { Strategy, ExtractJwt } from "passport-jwt";
-import prisma from "../prisma-client/prismainstance";
+import prisma from "../prisma-client/prismainstance.js";
 import "dotenv/config";
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secret: process.env.JWTTOKENSECRET,
+  secretOrKey: process.env.JWTTOKENSECRET,
 };
 
 const jwtStrategy = new Strategy(options, async (jwt_payload, done) => {
   try {
-    const user = prisma.user.findFirstOrThrow({
+    const user = await prisma.user.findFirstOrThrow({
       where: jwt_payload.id,
     });
     if (!user) {
