@@ -29,6 +29,8 @@ model Folder {
   id           Int      @id @default(autoincrement())
   ownerid      Int
   name         String
+  createdat    DateTime @default(now())
+  updatedat    DateTime @updatedAt
   owner        User     @relation(fields: [ownerid], references: [id])
   subfolders   Folder[] @relation("folderHierarchy")
   parentfolder Folder?  @relation("folderHierarchy", fields: [parentid], references: [id], onDelete: Cascade)
