@@ -1,9 +1,9 @@
-import passport from "passport";
-import jwtStrategy from "../strategies/jwt.js";
-import localStrategy from "../strategies/local.js";
+const passport = require("passport");
+const jwtStrategy = require("../strategies/jwt");
+const localStrategy = require("../strategies/local");
 
-const passportConfig = passport;
-passportConfig.use(jwtStrategy);
-passportConfig.use(localStrategy);
 
-export default passportConfig;
+passport.use(jwtStrategy);
+passport.use(localStrategy);
+
+module.exports = passport;
