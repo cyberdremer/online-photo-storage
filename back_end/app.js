@@ -1,10 +1,9 @@
-import Express from "express";
-import topLevelRoute from "./routes/toplevel.js";
-import passportConfig from "./config/passport.js";
-import "dotenv/config";
+const express = require("express");
+const topLevelRoute = require("./routes/toplevel");
+require("dotenv").config();
 
-const app = Express();
-app.use(Express.urlencoded({ extended: true }));
+const app = express();
+app.use(express.urlencoded({ extended: true }));
 
 app.use(topLevelRoute);
 app.listen(process.env.PORT, () => {
