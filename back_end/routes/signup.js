@@ -1,8 +1,8 @@
-import { Router } from "express";
-import { createAccount } from "../controllers/signup.js";
+const { Router } = require("express");
+const createAccount = require("../controllers/signup");
+
 const signUpRoute = Router();
 
+signUpRoute.post("/", createAccount);
 
-signUpRoute.post("/", createAccount)
-
-export default signUpRoute;
+module.exports = signUpRoute;
