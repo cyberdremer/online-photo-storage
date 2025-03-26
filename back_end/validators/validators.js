@@ -1,6 +1,7 @@
-import { validationResult, body } from "express-validator";
-import prisma from "../prisma-client/prismainstance.js";
-import bcrypt from "bcryptjs";
+const prisma = require("../prisma-client/prismainstance");
+const bcrypt = require("bcryptjs");
+const { body } = require("express-validator");
+
 const emptyError = "field cannot be empty!";
 const emailError = "field must be an email!";
 
@@ -10,38 +11,38 @@ const signUpValidation = [
     .notEmpty()
     .withMessage(`Username : ${emptyError}`)
     .escape()
-    .customSanitizer(async (username) => {
+    .custom(async (value) => {
       const user = await prisma.user.findFirst({
         where: {
-          username: username,
+          username: value,
         },
       });
-      if (!user) {
-        return false;
+      if (user) {
+        throw new Error(`Username already exists!`)
       }
-    })
-    .withMessage(`Username is already registered to another user!`),
+
+    }),
+    
 
   body("email")
     .trim()
     .notEmpty()
     .withMessage(`Email :${emptyError}`)
     .normalizeEmail()
-    .escape()
     .isEmail()
     .withMessage(`Email: ${emailError}`)
-    .customSanitizer(async (email) => {
+    .custom(async (value) => {
       const user = await prisma.user.findFirst({
         where: {
-          email: email,
+          email: value,
         },
       });
 
       if (user) {
-        return false;
+        throw new Error("Email is already registered to another user!")
       }
-    })
-    .withMessage(`Email is already registered to another user!`),
+    }),
+  
 
   body("firstname")
     .trim()
@@ -70,8 +71,8 @@ const signUpValidation = [
     .trim()
     .notEmpty()
     .withMessage(`Password: ${emptyError}`)
-    .customSanitizer(async (confirmpassword, { req }) => {
-      return confirmpassword === req.body.pasword;
+    .custom(async (value, { req }) => {
+      return value === req.body.password;
     })
     .withMessage(`Passwords must match!`),
 ];
@@ -82,10 +83,10 @@ const logInValidation = [
     .notEmpty()
     .withMessage(`Username :${emptyError}`)
     .escape()
-    .customSanitizer(async (username) => {
+    .custom(async (value) => {
       const user = await prisma.user.findFirst({
         where: {
-          username: username,
+          username: value,
         },
       });
       if (!user) {
@@ -98,18 +99,18 @@ const logInValidation = [
     .notEmpty()
     .withMessage(`Password :${emptyError}`)
     .escape()
-    .customSanitizer(async (password, { req }) => {
+    .custom(async (value, { req }) => {
       const user = await prisma.user.findFirst({
         where: {
           username: req.body.username,
         },
       });
-      return bcrypt.compare(password, user.password);
+      return bcrypt.compare(value, user.password);
     })
     .withMessage(`Invalid credentials, please try again`),
 ];
 
-export {
+module.exports = {
   signUpValidation,
-  logInValidation
-}
+  logInValidation,
+};
