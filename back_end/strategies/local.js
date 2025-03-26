@@ -1,6 +1,6 @@
-import { Strategy } from "passport-local";
-import bcrypt from "bcryptjs";
-import prisma from "../prisma-client/prismainstance.js";
+const { Strategy } = require("passport-local");
+const bcrypt = require("bcryptjs");
+const prisma = require("../prisma-client/prismainstance");
 
 const localStrategy = new Strategy(async (username, password, done) => {
   try {
@@ -8,6 +8,13 @@ const localStrategy = new Strategy(async (username, password, done) => {
       where: {
         username: username,
       },
+      include: {
+        folders: {
+          where: {
+            parentfolder: null
+          }
+        }
+      }
     });
     if (!user) {
       return done(null, false, { message: "Incorrect username" });
@@ -22,4 +29,4 @@ const localStrategy = new Strategy(async (username, password, done) => {
   }
 });
 
-export default localStrategy;
+module.exports = localStrategy;
