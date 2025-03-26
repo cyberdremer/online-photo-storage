@@ -1,42 +1,43 @@
-import asyncHandler from "express-async-handler";
-import { logInValidation } from "../validators/validators.js";
-import prisma from "../prisma-client/prismainstance.js";
-import passportConfig from "../config/passport.js";
-import { validationResult } from "express-validator";
-import { generateRefreshToken, generateUserToken } from "../utils/token.js";
+const { logInValidation } = require("../validators/validators");
+const passport = require("../config/passport");
+const { validationResult } = require("express-validator");
+const { generateUserToken } = require("../utils/token");
 
-const loginToAccountController = asyncHandler(async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    res.status(400).json({
-      error: {
-        message: errors.array(),
-        status: 400,
-      },
-    });
-  }
+const asyncHandler = require("express-async-handler");
 
-  passportConfig.authenticate("local", async (err, user, info) => {
-    if (err) return next(err);
-    if (!user) {
-      res.status(400).json({
+const loginToAccount = [
+  logInValidation,
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
         error: {
-          message: "Error in finding user",
+          message: errors.array(),
           status: 400,
         },
       });
     }
 
-    const token = generateUserToken(user);
-    res.status(201).json({
-      data: {
-        token: token,
-        message: "You are succesfully logged in!",
-      },
-    });
-  });
-});
+    passport.authenticate("local", async (err, user, info) => {
+      if (err) return next(err);
+      if (!user) {
+        return res.status(400).json({
+          error: {
+            message: "Error in finding user",
+            status: 400,
+          },
+        });
+      }
 
-const loginToAccount = [logInValidation, loginToAccountController];
+      const token = generateUserToken(user);
+      res.status(201).json({
+        data: {
+          token: token,
+          message: "You are succesfully logged in!",
+        },
+      });
+    })(req, res, next);
+  }),
+];
 
-export default loginToAccount;
+module.exports = loginToAccount;
