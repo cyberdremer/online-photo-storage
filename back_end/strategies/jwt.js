@@ -1,6 +1,6 @@
-import { Strategy, ExtractJwt } from "passport-jwt";
-import prisma from "../prisma-client/prismainstance.js";
-import "dotenv/config";
+const { Strategy, ExtractJwt } = require("passport-jwt");
+const prisma = require("../prisma-client/prismainstance");
+require("dotenv").config();
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -21,4 +21,4 @@ const jwtStrategy = new Strategy(options, async (jwt_payload, done) => {
   }
 });
 
-export default jwtStrategy;
+module.exports = jwtStrategy;
