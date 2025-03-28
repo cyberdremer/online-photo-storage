@@ -6,7 +6,7 @@ const generateUserToken = (user) => {
     {
       id: user.id,
       username: user.username,
-      rootfolderid: user.folders[0].id,
+      rootFolderID: user.folders[0].id,
     },
     process.env.JWTTOKENSECRET,
     { expiresIn: "5h" }
