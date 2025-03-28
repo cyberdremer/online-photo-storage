@@ -18,11 +18,9 @@ const signUpValidation = [
         },
       });
       if (user) {
-        throw new Error(`Username already exists!`)
+        throw new Error(`Username already exists!`);
       }
-
     }),
-    
 
   body("email")
     .trim()
@@ -39,10 +37,9 @@ const signUpValidation = [
       });
 
       if (user) {
-        throw new Error("Email is already registered to another user!")
+        throw new Error("Email is already registered to another user!");
       }
     }),
-  
 
   body("firstname")
     .trim()
@@ -110,7 +107,17 @@ const logInValidation = [
     .withMessage(`Invalid credentials, please try again`),
 ];
 
+const folderValidation = [
+  body(name)
+    .trim()
+    .notEmpty()
+    .withMessage(`Folder Name: ${emptyError}`)
+    .escape()
+    
+];
+
 module.exports = {
   signUpValidation,
   logInValidation,
+  folderValidation,
 };
