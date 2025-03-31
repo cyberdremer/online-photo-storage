@@ -1,15 +1,20 @@
 const multer = require("multer");
 const path = require("path");
-const decodeFileName = require("../");
+const decodeFileName = require("../utils/decodefilename");
+const fs = require("node:fs");
+const pathname = "./public/uploads";
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./public/uploads/");
+    if (!fs.existsSync(pathname)) {
+      fs.mkdirSync(pathname, { recursive: true });
+    }
+    cb(null, pathname);
   },
   filename: (req, file, cb) => {
-    const decodedname = decodeFileName(file.originalname);
-    const extension = path.extname(decodedname);
-    const basename = path.basename(decodedname, extension);
-    cb(null, `${basename}-${Date.now()}${extension}`);
+    const filename = decodeFileName(file.originalname);
+    const ext = path.extname(filename);
+    const basename = path.basename(filename, ext);
+    cb(null, `${basename}-${Date.now()}${ext}`);
   },
 });
 
