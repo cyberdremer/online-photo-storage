@@ -3,6 +3,7 @@ require("dotenv").config();
 const fs = require("fs");
 const { file } = require("../prisma-client/prismainstance");
 const { error } = require("console");
+const { Readable } = require("stream")
 
 const uploadOnCloudinary = async (localFilePath, username) => {
   let uploadedResult;
@@ -28,8 +29,10 @@ const downloadFileCloudinary = async (url, outputPath) => {
     if (!response.ok) {
       throw new Error(`Unable to retrieve resource: ${response.status}`);
     }
+
+    
     const filestream = fs.createWriteStream(outputPath);
-    await response.body.pipeTo(filestream);
+    Readable.fromWeb(response.body).pipe(filestream)
 
     filestream.on("error", (err) => {
       console.error(`Error in writing file: ${err}`);
