@@ -3,18 +3,14 @@ const { signUpValidation } = require("../validators/validators");
 const hashPassword = require("../utils/password.js");
 const prisma = require("../prisma-client/prismainstance");
 const { validationResult } = require("express-validator");
+const ErrorWithStatusCode = require("../classes/error.js");
 
 const createAccount = [
   signUpValidation,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({
-        error: {
-          messsage: errors.array(),
-          status: 400,
-        },
-      });
+      next(new ErrorWithStatusCode(errors.array(), 400));
     }
     const hashedpassword = await hashPassword(req.body.password);
     const user = await prisma.user.create({
@@ -27,9 +23,9 @@ const createAccount = [
         folders: {
           create: {
             name: "root",
-          }
-        }
-      }
+          },
+        },
+      },
     });
 
     return res.status(201).json({
