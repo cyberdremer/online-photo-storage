@@ -108,16 +108,26 @@ const logInValidation = [
 ];
 
 const folderValidation = [
-  body(name)
+  body("name")
     .trim()
     .notEmpty()
     .withMessage(`Folder Name: ${emptyError}`)
-    .escape()
-    
+    .toLowerCase()
+    .escape(),
+];
+
+const fileValidation = [
+  body("name")
+    .trim()
+    .notEmpty()
+    .withMessage(`File Name :${emptyError}`)
+    .toLowerCase()
+    .escape(),
 ];
 
 module.exports = {
   signUpValidation,
   logInValidation,
   folderValidation,
+  fileValidation,
 };
