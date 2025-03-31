@@ -1,4 +1,5 @@
-const { Strategy, ExtractJwt } = require("passport-jwt");
+const ExtractJwt = require("passport-jwt").ExtractJwt;
+const JwtStrategy = require("passport-jwt").Strategy;
 const prisma = require("../prisma-client/prismainstance");
 require("dotenv").config();
 
@@ -7,10 +8,19 @@ const options = {
   secretOrKey: process.env.JWTTOKENSECRET,
 };
 
-const jwtStrategy = new Strategy(options, async (jwt_payload, done) => {
+const jwtStrategy = new JwtStrategy(options, async (jwt_payload, done) => {
   try {
     const user = await prisma.user.findFirstOrThrow({
-      where: jwt_payload.id,
+      where: {
+        username: jwt_payload.username,
+      },
+      include: {
+        folders: {
+          where: {
+            parentfolder: null,
+          },
+        },
+      },
     });
     if (!user) {
       return done(null, false, { message: "User does not exist" });
