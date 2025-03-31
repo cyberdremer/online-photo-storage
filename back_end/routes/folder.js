@@ -1,5 +1,4 @@
 const { Router } = require("express");
-const passport = require("../config/passport");
 const {
   createFolder,
   getFoldersAndFiles,
@@ -8,9 +7,9 @@ const {
 } = require("../controllers/folder");
 const folderRoute = Router();
 
-folderRoute.post("{/:parentFolderId}", createFolder);
-folderRoute.put("{/:parentFolderId}", updateFolder);
-folderRoute.delete("{/:folderId}", deleteFolder);
-folderRoute.get("{/:folderId}", getFoldersAndFiles);
+folderRoute.delete("/:folderId", deleteFolder);
+folderRoute.post("/:parentFolderId?", createFolder);
+folderRoute.put("/:folderId?", updateFolder);
+folderRoute.get("/:folderId?", getFoldersAndFiles);
 
 module.exports = folderRoute;
