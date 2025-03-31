@@ -9,7 +9,7 @@ const {
 
 fileRoute.delete("/:fileId", deleteFile);
 fileRoute.get("/:fileId", downloadFile);
-fileRoute.put("/:fileId", updateFileName);
+fileRoute.put("/:folderId?/:fileId", updateFileName);
 fileRoute.post("/:folderId?", uploadFile);
 
 
