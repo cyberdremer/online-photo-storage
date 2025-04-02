@@ -1,0 +1,17 @@
+import Header from "../fragments/header";
+import Footer from "../fragments/footer";
+import LandingBlurb from "../fragments/landingblurb";
+import { Flex } from "@chakra-ui/react";
+const Landing = () => {
+  return (
+    <>
+      <Flex grow="1" direction="column" padding="1rem">
+        <Header></Header>
+        <LandingBlurb></LandingBlurb>
+        <Footer></Footer>
+      </Flex>
+    </>
+  );
+};
+
+export default Landing;
