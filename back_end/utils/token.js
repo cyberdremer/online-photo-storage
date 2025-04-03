@@ -20,7 +20,7 @@ const generateRefreshToken = (user) => {
       username: user.username,
       iat: Date.now(),
     },
-    process.env.JWTTOKENSECRET,
+    process.env.JWTREFRESHTOKENSECRET,
     { expiresIn: "1d" }
   );
 };
