@@ -6,12 +6,12 @@ const { generateUserToken, generateRefreshToken } = require("../utils/token");
 const tokenRefresh = asyncHandler(async (req, res, next) => {
   const refreshToken = req.cookies.refreshToken;
   if (!refreshToken) {
-    next(new ErrorWithStatusCode("Token Invalid or Expired", 403));
+    throw new ErrorWithStatusCode("Token Invalid or Expired", 403);
   }
 
   jwt.verify(refreshToken, process.env.JWTREFRESHTOKENSECRET, (err, user) => {
     if (err) {
-      next(new ErrorWithStatusCode("Token Invalid or Expired", 403));
+      throw new ErrorWithStatusCode("Token Invalid or Expired", 403);
     }
     const newUserToken = generateUserToken(user);
     const newRefreshToken = generateRefreshToken(user);

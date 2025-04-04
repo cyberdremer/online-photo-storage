@@ -18,7 +18,10 @@ const uploadFile = [
   upload.single("uploadedFile"),
   asyncHandler(async (req, res, next) => {
     if (!req.file) {
-      next("File not attached, please upload a file!", 413);
+      throw new ErrorWithStatusCode(
+        "File not attached, please upload a file!",
+        413
+      );
     }
     const folderID = Number(req.params.folderId) || req.user.folders[0].id;
     const result = await uploadOnCloudinary(req.file.path, req.user.username);
@@ -53,6 +56,10 @@ const deleteFile = [
         ownerid: req.user.id,
       },
     });
+
+    if (!fileToDelete) {
+      throw new ErrorWithStatusCode("File to delete does not exist!", 404);
+    }
 
     await deleteOnCloudinary(fileToDelete.cloudinarypublicid);
 
@@ -117,7 +124,7 @@ const updateFileName = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      next(new ErrorWithStatusCode(errors.array(), 409));
+      throw new ErrorWithStatusCode(errors.array(), 409);
     }
     const fileId = Number(req.params.fileId);
     const parentId = Number(req.params.folderId) || req.user.folders[0].id;
@@ -131,11 +138,9 @@ const updateFileName = [
     });
 
     if (file) {
-      next(
-        new ErrorWithStatusCode(
-          "File name is already in use! Please use a unique filename!",
-          400
-        )
+      throw new ErrorWithStatusCode(
+        "File with that name already exists in this directory! Please choose a different name!",
+        409
       );
     }
 

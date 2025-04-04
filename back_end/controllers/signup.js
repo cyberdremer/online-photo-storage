@@ -10,7 +10,7 @@ const createAccount = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      next(new ErrorWithStatusCode(errors.array(), 400));
+      throw new ErrorWithStatusCode(errors.array(), 400);
     }
     const hashedpassword = await hashPassword(req.body.password);
     const user = await prisma.user.create({

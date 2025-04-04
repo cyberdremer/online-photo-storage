@@ -15,7 +15,7 @@ const createFolder = [
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      next(new ErrorWithStatusCode(errors.array(), 409))
+      throw new ErrorWithStatusCode(errors.array(), 409);
     }
 
     const folders = await prisma.folder.findFirst({
@@ -26,7 +26,7 @@ const createFolder = [
     });
 
     if (folders) {
-      next(new ErrorWithStatusCode("Folder already exists", 409));
+      throw new ErrorWithStatusCode("Folder already exists", 409);
     }
 
     await prisma.folder.create({
@@ -47,11 +47,11 @@ const createFolder = [
 ];
 
 const deleteFolder = [
-  passport.authenticate("jwt", {session: false}),
+  passport.authenticate("jwt", { session: false }),
   asyncHandler(async (req, res, next) => {
     let folderId = req.params.folderId;
     folderId = Number(folderId);
-    
+
     const folder = await prisma.folder.findFirst({
       where: {
         id: folderId,
@@ -64,11 +64,9 @@ const deleteFolder = [
     });
 
     if (!folder) {
-      next(
-        new ErrorWithStatusCode(
-          "Cannot delete a folder that does not exist!",
-          403
-        )
+      throw new ErrorWithStatusCode(
+        "Cannot delete a folder that does not exist!",
+        403
       );
     }
 
@@ -127,11 +125,9 @@ const updateFolder = [
       },
     });
     if (folder) {
-      next(
-        new ErrorWithStatusCode(
-          "Folder name already exists! Select a new folder name! ",
-          409
-        )
+      throw new ErrorWithStatusCode(
+        "Folder name already exists! Select a new folder name! ",
+        409
       );
     }
     await prisma.folder.update({
@@ -164,6 +160,9 @@ const getFoldersAndFiles = [
         where: {
           ownerid: req.user.id,
           parentid: folderId,
+        },
+        include: {
+          files: true,
         },
       }),
       await prisma.file.findMany({
