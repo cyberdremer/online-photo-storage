@@ -1,6 +1,6 @@
-import Header from "../fragments/header";
-import Footer from "../fragments/footer";
-import LandingBlurb from "../fragments/landingblurb";
+import Header from "../fragments/pagefragments/header";
+import Footer from "../fragments/pagefragments/footer";
+import LandingBlurb from "../fragments/pagefragments/landingblurb";
 import { Flex } from "@chakra-ui/react";
 const Landing = () => {
   return (
