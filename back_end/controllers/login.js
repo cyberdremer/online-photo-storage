@@ -1,7 +1,7 @@
 const { logInValidation } = require("../validators/validators");
 const passport = require("../config/passport");
 const { validationResult } = require("express-validator");
-const { generateUserToken } = require("../utils/token");
+const { generateUserToken, generateRefreshToken } = require("../utils/token");
 const formatValidatorError = require("../utils/errorformatter");
 
 const asyncHandler = require("express-async-handler");
@@ -23,13 +23,15 @@ const loginToAccount = [
       }
 
       const token = generateUserToken(user);
+      const refreshToken = generateRefreshToken(user);
       res.status(201).json({
         data: {
           token: token,
+          refreshToken: refreshToken,
           message: "You are succesfully logged in!",
           user: {
             username: user.username,
-            rootFolderId: user.folder[0].id,
+            rootFolderId: user.folders[0].id,
           }
         },
       });
