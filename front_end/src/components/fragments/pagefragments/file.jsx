@@ -14,7 +14,7 @@ import {
 import { FaFile } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useRef, useState } from "react";
-import { DeleteAlert } from "./alerts/alerts";
+import { DeleteAlert } from "../alerts/alerts";
 const File = ({
   name,
   createdat,
