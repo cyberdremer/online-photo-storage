@@ -1,7 +1,7 @@
 import { Button, Dialog, Portal, CloseButton, Alert } from "@chakra-ui/react";
 import { useState } from "react";
 
-const DeleteAlert = ({ deleteTitle, assetType, open, deleteAction }) => {
+const DeleteAlert = ({ deleteTitle, assetType, open, deleteAction, handleClose }) => {
   return (
     <Dialog.Root role="alertdialog" open={open}>
       <Portal>
@@ -25,7 +25,7 @@ const DeleteAlert = ({ deleteTitle, assetType, open, deleteAction }) => {
               <Button colorPalette="red" onClick={deleteAction}>Delete</Button>
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild>
-              <CloseButton size="sm" />
+              <CloseButton onClick={handleClose}size="sm" />
             </Dialog.CloseTrigger>
           </Dialog.Content>
         </Dialog.Positioner>
