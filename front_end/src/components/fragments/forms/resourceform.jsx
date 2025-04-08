@@ -1,18 +1,21 @@
 import { Fieldset, Field, Input, Button, Portal } from "@chakra-ui/react";
 import { SuccessAlert, ErrorAlert } from "../alerts/alerts";
+import { useState } from "react";
 
-const FolderResourceForm = ({
+const ResourceForm = ({
   successMessage,
   handleSubmission,
   success,
   error,
   errorMessage,
+  name,
+  title = "",
 }) => {
-  const [name, setName] = useState("");
+  const [resourceName, setResourceName] = useState("");
 
   const handleChange = (e) => {
-    const name = e.target.name;
-    setName(e.target.value);
+    const resourceName = e.target.name;
+    setResourceName(resourceName);
   };
 
   return (
@@ -34,3 +37,5 @@ const FolderResourceForm = ({
     </Fieldset.Root>
   );
 };
+
+export default ResourceForm;
