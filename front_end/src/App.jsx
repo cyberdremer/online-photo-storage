@@ -1,14 +1,16 @@
-import { Button, HStack } from "@chakra-ui/react";
-import { Provider } from "./components/ui/provider";
+import { Container, Flex } from "@chakra-ui/react";
+
+import { BrowserRouter } from "react-router-dom";
+import PageRoutes from "./components/pagedata/pageroutes";
+
 
 const App = ({}) => {
   return (
-    <>
-      <HStack>
-        <Button>Click me</Button>
-        <Button>Click me</Button>
-      </HStack>
-    </>
+    <Container minHeight="100vh" maxWidth="100%" padding="0" margin={"0"}>
+        <BrowserRouter>
+          <PageRoutes></PageRoutes>
+        </BrowserRouter>
+    </Container>
   );
 };
 
