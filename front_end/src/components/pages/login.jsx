@@ -1,6 +1,6 @@
-import Header from "../fragments/header";
-import Footer from "../fragments/footer";
-import LoginForm from "../fragments/loginform";
+import Header from "../fragments/pagefragments/header";
+import Footer from "../fragments/pagefragments/footer";
+import LoginForm from "../fragments/forms/loginform";
 import { Flex } from "@chakra-ui/react";
 const Login = () => {
   return (
