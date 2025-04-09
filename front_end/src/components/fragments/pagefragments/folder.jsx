@@ -55,7 +55,7 @@ const Folder = ({
                 </>
               )}
             </VStack>
-            <Menu.Root >
+            <Menu.Root>
               <Menu.Trigger asChild>
                 <IconButton>
                   <BsThreeDotsVertical></BsThreeDotsVertical>
@@ -64,19 +64,25 @@ const Folder = ({
               <Portal>
                 <Menu.Positioner>
                   <Menu.Content>
-                    <Menu.Item value="delete-folder" onClick={handleDelete} id={{id, parentId}}>
+                    <Menu.Item
+                      value="delete-folder"
+                      onClick={(e) => handleDelete(e)}
+                      id={{ id, parentId }}
+                    >
                       Delete Folder
                     </Menu.Item>
-                    <Menu.Item value="rename-folder" onClick={handleRename} id={{id, parentId}}>
+                    <Menu.Item
+                      value="rename-folder"
+                      onClick={(e) => handleRename(e)}
+                      id={{ id, parentId }}
+                    >
                       Rename Folder
                     </Menu.Item>
                     <Menu.Item
                       value="display-folder-info"
                       onClick={displayExtraInfo}
                     >
-                      {infoVisible
-                        ? "Hide Folder Info"
-                        : "Display Folder Info"}
+                      {infoVisible ? "Hide Folder Info" : "Display Folder Info"}
                     </Menu.Item>
                   </Menu.Content>
                 </Menu.Positioner>
