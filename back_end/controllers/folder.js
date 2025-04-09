@@ -45,6 +45,7 @@ const createFolder = [
           name: createdFolder.name,
           createdat: createdFolder.createdat,
           updatedat: createdFolder.updatedat,
+          id: createdFolder.id,
         },
       },
     });
@@ -184,6 +185,7 @@ const getFoldersAndFiles = [
           createdat: true,
           updatedat: true,
           id: true,
+          size: true
         },
       }),
     ]);
