@@ -100,11 +100,11 @@ const downloadFile = async (folderId, token) => {
   return data;
 };
 
-const postFolder = async (folderId, folder, token) => {
+const postFolder = async (parentFolderid, folder, token) => {
   const formData = formToObject(folder);
   const query = new URLSearchParams(formData).toString();
 
-  const response = await fetch(`http://localhost:4000/folder/${folderId}`, {
+  const response = await fetch(`http://localhost:4000/folder/${parentFolderid}`, {
     method: "post",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -120,8 +120,8 @@ const postFolder = async (folderId, folder, token) => {
   return data;
 };
 
-const renameFolder = async (folderId, folder, token) => {
-  const formData = formToObject(folder);
+const renameFolder = async (folderId, name, token) => {
+  const formData = formToObject(name);
   const query = new URLSearchParams(formData).toString();
   const response = await fetch(`http://localhost:4000/folder/${folderId}`, {
     method: "put",
