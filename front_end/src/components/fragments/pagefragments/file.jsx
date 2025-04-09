@@ -62,22 +62,22 @@ const File = ({
                   <Menu.Content>
                     <Menu.Item
                       value="delete-file"
-                      onClick={handleDelete}
-                      id={ id}
+                      onClick={(e) => handleDelete(e)}
+                      id={id}
                     >
                       Delete File
                     </Menu.Item>
 
                     <Menu.Item
                       value="update-file"
-                      onClick={handleRename}
+                      onClick={(e) => handleRename(e)}
                       id={ id}
                     >
                       Update File Name
                     </Menu.Item>
                     <Menu.Item
                       value="download-file"
-                      onClick={handleDownload}
+                      onClick={(e) => handleDownload(e)}
                       id={ id}
                     >
                       Download File

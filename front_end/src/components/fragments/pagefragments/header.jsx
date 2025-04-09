@@ -12,9 +12,8 @@ const Header = ({}) => {
         &gt; &gt; dave.save
                                                           
 
-        {/* TODO Try to find a command line font
-        USE DOT MATRIX FONT */}
-        {/* TODO Create inverted color of dave.save ascii art */}
+    
+        
 
         </Link>
         <Group gap="1rem">
