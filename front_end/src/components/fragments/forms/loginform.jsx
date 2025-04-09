@@ -40,24 +40,20 @@ const LoginForm = () => {
       updateUserToken(response.data.token);
       updateAuthenticationStatus();
       setLoggedIn(true);
-
       setTimeout(() => {
         navigate("/view-assets");
       }, 3000);
     } catch (err) {
-      setError(
-        {
-          occurred: true,
-          message: err.message,
-        },
-        10000
-      );
+      setError({
+        occurred: true,
+        message: err.message,
+      });
       setTimeout(() => {
         setError({
           occurred: false,
           message: "",
         });
-      }, 10000);
+      }, 3000);
     }
   };
 
