@@ -2,7 +2,7 @@ import { Box, CloseButton, Dialog, FileUpload, Portal } from "@chakra-ui/react";
 
 const GenericModal = ({ isOpen, children, title, setOpen }) => {
   return (
-    <Dialog.Root open={isOpen} >
+    <Dialog.Root open={isOpen} motionPreset="slide-in-top" >
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner>
