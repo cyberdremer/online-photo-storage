@@ -45,9 +45,7 @@ const AssetDashboard = () => {
   const { items, loading, error, setItems } = useFetchAssets(
     user.currentFolderId
   );
-  //TODO Whenever we rename a folder, delete a folder, upload a file, rename a file or delete a file, we need to update
-  //  the items from the fetchAssets hook, we can do this be using the setItems function from the hook. Using the folder or file id
-  // as the replacing criteria.
+  // TODO Add functionality to change view based on clicking a folder icon
 
   const [openDelete, setOpenDelete] = useState(false);
 
@@ -350,8 +348,7 @@ const AssetDashboard = () => {
           open={modalVisible.fileDelete}
           deleteAction={handleFileDelete}
           handleClose={changeFileDeleteVisbility}
-          // TODO add a prop for handling the deletion of the file.
-          // TODO get file ID from the file object, should be in file object id prop
+          
         ></DeleteAlert>
         <GenericModal
           isOpen={modalVisible.fileUpload}
@@ -374,7 +371,7 @@ const AssetDashboard = () => {
             successMessage={requestSuccess.message}
             error={requestError.status}
             errorMessage={requestError.message}
-            handleSubmission={() => {}}
+            handleSubmission={handleFileRename}
             name={"New File Name: "}
           ></ResourceForm>
         </GenericModal>
@@ -389,7 +386,7 @@ const AssetDashboard = () => {
             successMessage={requestSuccess.message}
             error={requestError.status}
             errorMessage={requestError.message}
-            handleSubmission={() => {}}
+            handleSubmission={handleFolderCreate}
             name={"Folder Name: "}
           ></ResourceForm>
         </GenericModal>
@@ -404,7 +401,7 @@ const AssetDashboard = () => {
             successMessage={requestSuccess.message}
             error={requestError.status}
             errorMessage={requestError.message}
-            handleSubmission={() => {}}
+            handleSubmission={handleFolderRename}
             name={"New Folder Name:"}
           ></ResourceForm>
         </GenericModal>
@@ -413,10 +410,9 @@ const AssetDashboard = () => {
           deleteTitle="Delete Folder"
           assetType={"folder"}
           open={modalVisible.folderDelete}
-          deleteAction={() => {}}
+          deleteAction={handleFolderDelete}
           handleClose={changeFolderDeleteVisbility}
-          // TODO add a prop for handling the deletion of the file.
-          // TODO get file ID from the file object, should be in file object id prop
+         
         ></DeleteAlert>
 
         <AssetDisplay loading={loading} error={error}>
