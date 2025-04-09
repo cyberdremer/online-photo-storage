@@ -151,7 +151,7 @@ const updateFileName = [
       );
     }
 
-    const createdFile = await prisma.file.update({
+    const updatedFile = await prisma.file.update({
       where: {
         ownerid: req.user.id,
         id: fileId,
@@ -166,6 +166,9 @@ const updateFileName = [
       data: {
         message: `File name has been updated to: ${createdFile.name}`,
         status: 201,
+        fileInfo: {
+          updatedat: updatedFile.updatedat,
+        },
       },
     });
   }),
