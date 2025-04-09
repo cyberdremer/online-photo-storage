@@ -29,7 +29,7 @@ const createFolder = [
       throw new ErrorWithStatusCode("Folder already exists", 409);
     }
 
-    await prisma.folder.create({
+    const createdFolder = await prisma.folder.create({
       data: {
         name: req.body.name,
         ownerid: req.user.id,
@@ -41,6 +41,11 @@ const createFolder = [
       data: {
         message: `Folder: ${req.body.name} sucessfully created!`,
         status: 201,
+        folderInfo: {
+          name: createdFolder.name,
+          createdat: createdFolder.createdat,
+          updatedat: createdFolder.updatedat,
+        },
       },
     });
   }),
