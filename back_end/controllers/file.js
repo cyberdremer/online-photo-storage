@@ -25,7 +25,8 @@ const uploadFile = [
     }
     const folderID = Number(req.params.folderId) || req.user.folders[0].id;
     const result = await uploadOnCloudinary(req.file.path, req.user.username);
-    await prisma.file.create({
+
+    const uploadedFile = await prisma.file.create({
       data: {
         name: decodeFileName(req.file.originalname),
         folderid: folderID,
@@ -41,6 +42,12 @@ const uploadFile = [
       data: {
         message: `${req.file.originalname} has been uploaded!`,
         status: 201,
+        fileInfo: {
+          name: uploadedFile.name,
+          size: uploadedFile.size,
+          createdAt: uploadedFile.createdat,
+          updatedAt: uploadedFile.updatedat,
+        },
       },
     });
   }),
