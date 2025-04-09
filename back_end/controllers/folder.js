@@ -166,14 +166,24 @@ const getFoldersAndFiles = [
           ownerid: req.user.id,
           parentid: folderId,
         },
-        include: {
+        select: {
           files: true,
+          name: true,
+          createdat: true,
+          updatedat: true,
+          id: true,
         },
       }),
       await prisma.file.findMany({
         where: {
           ownerid: req.user.id,
           folderid: folderId,
+        },
+        select: {
+          name: true,
+          createdat: true,
+          updatedat: true,
+          id: true,
         },
       }),
     ]);
