@@ -9,7 +9,7 @@ const folderRoute = Router();
 
 folderRoute.delete("/:folderId", deleteFolder);
 folderRoute.post("/:parentFolderId?", createFolder);
-folderRoute.put("/:folderId?", updateFolder);
+folderRoute.put("/:parentFolderId?/folderId", updateFolder);
 folderRoute.get("/:folderId?", getFoldersAndFiles);
 
 module.exports = folderRoute;
