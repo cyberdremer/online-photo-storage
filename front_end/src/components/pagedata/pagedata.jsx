@@ -22,7 +22,7 @@ const pageData = [
     title: "Log In Page",
   },
   {
-    path: "/view-assets",
+    path: "/view-assets/folders",
     element: (
       <RequireAuth>
         <AssetDashboard></AssetDashboard>
