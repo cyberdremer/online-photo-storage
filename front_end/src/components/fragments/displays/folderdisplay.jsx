@@ -10,6 +10,7 @@ const FolderDisplay = ({ folders, handleOpen, handleRename, handleDelete }) => {
           updatedat={folder.updatedat}
           key={folder.id}
           files={folder.files}
+          id={folder.id}
           parentId={folder.parentId}
           handleOpen={handleOpen}
           handleRename={handleRename}
