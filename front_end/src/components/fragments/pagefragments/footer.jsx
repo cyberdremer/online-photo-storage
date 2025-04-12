@@ -5,7 +5,7 @@ const Footer = () => {
     <Container minW="100%" maxW="100%" padding="0" margin="0">
       <footer
         style={{
-          top: "100vh",
+          
           minWidth: "100%",
           minHeight:"2.5rem",
           backgroundColor: "#2D3748",

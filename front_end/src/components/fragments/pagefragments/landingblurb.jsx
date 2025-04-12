@@ -7,7 +7,7 @@ const LandingBlurb = () => {
     navigate("/signup");
   };
   return (
-    <Flex direction="column" gap="3rem" grow="2" margin="2rem" marginBottom="2.5rem" flex="2">
+    <Flex direction="column" gap="3rem" grow="2" margin="2rem" marginBottom="2.5rem" flex="2" animationName="fade-in" animationDuration="slowest">
       <Container alignSelf={"center"} gap="1rem">
         <section>
           <Heading size="5xl">&gt; &gt;Secure.Fast.Reliable</Heading>

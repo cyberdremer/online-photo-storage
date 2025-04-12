@@ -1,8 +1,10 @@
 import { Breadcrumb, Button, Icon } from "@chakra-ui/react";
 import { LiaSlashSolid } from "react-icons/lia";
+import { keyframes } from "@emotion/react";
 import { BsFolder, BsFolder2Open, BsFileArrowDown } from "react-icons/bs";
 import { useContext } from "react";
 import { UserContext } from "@/components/context/userinfo";
+import truncateString from "@/components/utils/stringformatter";
 const FolderBreadCrumbs = ({ folderHistory, updateFolderHistory }) => {
   const { updateCurrentFolder } = useContext(UserContext);
 
@@ -16,6 +18,8 @@ const FolderBreadCrumbs = ({ folderHistory, updateFolderHistory }) => {
     updateFolderHistory(newFileHistory);
     updateCurrentFolder(idOfSelectedFolder);
   };
+
+  
 
   return (
     <>
@@ -32,7 +36,7 @@ const FolderBreadCrumbs = ({ folderHistory, updateFolderHistory }) => {
                       href="#"
                     >
                       <BsFolder></BsFolder>
-                      {folder.name}
+                      {truncateString(folder.name, 12)}
                     </Breadcrumb.Link>
                   </Breadcrumb.Item>
                   <Breadcrumb.Separator>
@@ -43,14 +47,18 @@ const FolderBreadCrumbs = ({ folderHistory, updateFolderHistory }) => {
             } else {
               return (
                 <>
-                  <Breadcrumb.Item id={folder.id}>
+                  <Breadcrumb.Item
+                    id={folder.id}
+                    animationName="slide-from-left-full"
+                    animationDuration="slow"
+                  >
                     <Breadcrumb.Link
                       id={folder.id}
                       onClick={(e) => popSkippedChildren(e)}
                       href="#"
                     >
                       <BsFolder2Open></BsFolder2Open>
-                      {folder.name}
+                      {truncateString(folder.name, 12)}
                     </Breadcrumb.Link>
                   </Breadcrumb.Item>
                 </>

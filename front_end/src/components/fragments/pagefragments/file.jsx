@@ -15,6 +15,7 @@ import { FaFile } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useRef, useState } from "react";
 import { DeleteAlert } from "../alerts/alerts";
+import truncateString from "@/components/utils/stringformatter";
 const File = ({
   name,
   createdat,
@@ -34,12 +35,12 @@ const File = ({
 
   return (
     <GridItem id={id}>
-      <Box maxW="sm" borderWidth="1px" minH="3rem">
+      <Box maxW="sm" borderWidth="1px" minH="3rem" animationName="fade-in" animationDuration="slowest">
         <Box p="4" spaceY="2">
           <HStack>
             <VStack alignItems="flex-start" textStyle="sm">
               <FaFile size="5rem"></FaFile>
-              <Text>{name}</Text>
+              <Text>{truncateString(name, 18)}</Text>
               <Text>
                 Size: <FormatByte value={size}></FormatByte>
               </Text>

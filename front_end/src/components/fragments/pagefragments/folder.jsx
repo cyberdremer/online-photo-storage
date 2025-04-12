@@ -14,6 +14,7 @@ import {
 import { FaFolder } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState } from "react";
+import truncateString from "@/components/utils/stringformatter";
 const Folder = ({
   name,
   createdat,
@@ -31,13 +32,13 @@ const Folder = ({
     setInfoVisible(!infoVisible);
   };
   return (
-    <GridItem id={id} onClick={handleOpen}>
-      <Box maxW="sm" borderWidth="1px" minH="3rem">
+    <GridItem id={id}>
+      <Box maxW="sm" borderWidth="1px" minH="3rem" animationName="fade-in" animationDuration="slowest">
         <Box p="4" spaceY="2">
           <HStack>
             <VStack alignItems="flex-start">
               <FaFolder size="5rem"></FaFolder>
-              <Text textStyle="sm">{name}</Text>
+              <Text textStyle="sm">{truncateString(name, 15)}</Text>
               <Text textStyle="sm">
                 Total Size:{" "}
                 <FormatByte
@@ -65,16 +66,25 @@ const Folder = ({
                 <Menu.Positioner>
                   <Menu.Content>
                     <Menu.Item
+                      value="open-folder"
+                      onClick={(e) => handleOpen(e)}
+                      id={id}
+                      data-folder-name={name}
+                      // TODO fix bug relating to names not rendering on the breadcrumbs
+                    >Open Folder</Menu.Item>
+                    <Menu.Item
                       value="delete-folder"
                       onClick={(e) => handleDelete(e)}
-                      id={{ id, parentId }}
+                      id={id}
                     >
                       Delete Folder
                     </Menu.Item>
                     <Menu.Item
                       value="rename-folder"
                       onClick={(e) => handleRename(e)}
-                      id={{ id, parentId }}
+                      id={id}
+                      name={name}
+                      
                     >
                       Rename Folder
                     </Menu.Item>

@@ -10,7 +10,7 @@ const LogOutBlurb = () => {
   return (
     <>
       <Container flex="2">
-        <VStack alignItems="self-start">
+        <VStack alignItems="self-start" padding="1rem">
           <Heading> You are now logged out!</Heading>
           <Text>
             {" "}
