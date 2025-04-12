@@ -87,19 +87,21 @@ const renameFile = async (fileId, form, token) => {
   return data;
 };
 
-const downloadFile = async (folderId, token) => {
-  const response = await fetch(`https://localhost:4000/file/${folderId}`, {
+const downloadFile = async (fileId, token) => {
+  const response = await fetch(`http://localhost:4000/file/${fileId}`, {
     method: "get",
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 
-  const data = await response.json();
+  const file = await response.blob();
+  // TODO fix the content-disposition header not showing up in the response. I would like for the downloads to be of the names of their original filename
+
   if (!response.ok) {
     throw new Error(data.error.message || response.statusText);
   }
-  return data;
+  return { file };
 };
 
 const postFolder = async (parentFolderid, folder, token) => {
