@@ -9,6 +9,7 @@ import {
   ProgressCircle,
   VStack,
   Icon,
+  Text
 } from "@chakra-ui/react";
 
 import { FaFolderOpen } from "react-icons/fa";
@@ -36,37 +37,21 @@ const AssetDisplay = ({ children, loading, error, items }) => {
     </Stack>;
   }
 
-  if (items) {
-    if (items.files.length === 0 && items.folders.length === 0) {
-      return (
-        <VStack>
-          <Icon>
-            <FaFolderOpen></FaFolderOpen>
-          </Icon>
-          <Text>
-            There are no assets in this folder! Upload some or create a folder
-            here, it's very lonely here : (
-          </Text>
-        </VStack>
-      );
-    } else {
-      return (
-        <Container>
-          <SimpleGrid columns="4" gap="1rem">
-            {children}
-          </SimpleGrid>
-        </Container>
-      );
-    }
+  if (items && items.files.length === 0 && items.folders.length === 0) {
+    return (
+      <Stack alignSelf="center" padding="1rem" animationName="fade-in" animationDuration="slowest">
+        <Icon alignSelf="center">
+          <FaFolderOpen size="10rem"></FaFolderOpen>
+        </Icon>
+        <Text fontSize="l" lineClamp="4">
+          There are no assets here! You can make it less lonely by uploading a
+          file or creating a folder!
+        </Text>
+      </Stack>
+    );
   }
 
-  // return (
-  //   <Container>
-  //     <SimpleGrid columns="4" gap="1rem">
-  //       {children}
-  //     </SimpleGrid>
-  //   </Container>
-  // );
+  return <Container>{children}</Container>;
 };
 
 export default AssetDisplay;
