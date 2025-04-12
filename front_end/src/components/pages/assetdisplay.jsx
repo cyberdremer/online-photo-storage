@@ -7,12 +7,13 @@ import {
   Alert,
   Container,
   ProgressCircle,
+  VStack,
+  Icon,
 } from "@chakra-ui/react";
-import FoldersAndFiles from "../effects/fetchFoldersAndFiles";
-import File from "../fragments/pagefragments/file";
-import Folder from "../fragments/pagefragments/folder";
 
-const AssetDisplay = ({ children, loading, error }) => {
+import { FaFolderOpen } from "react-icons/fa";
+
+const AssetDisplay = ({ children, loading, error, items }) => {
   if (loading) {
     return (
       <Stack alignSelf="center">
@@ -35,13 +36,37 @@ const AssetDisplay = ({ children, loading, error }) => {
     </Stack>;
   }
 
-  return (
-    <Container>
-      <SimpleGrid columns="6" gap="1rem">
-        {children}
-      </SimpleGrid>
-    </Container>
-  );
+  if (items) {
+    if (items.files.length === 0 && items.folders.length === 0) {
+      return (
+        <VStack>
+          <Icon>
+            <FaFolderOpen></FaFolderOpen>
+          </Icon>
+          <Text>
+            There are no assets in this folder! Upload some or create a folder
+            here, it's very lonely here : (
+          </Text>
+        </VStack>
+      );
+    } else {
+      return (
+        <Container>
+          <SimpleGrid columns="4" gap="1rem">
+            {children}
+          </SimpleGrid>
+        </Container>
+      );
+    }
+  }
+
+  // return (
+  //   <Container>
+  //     <SimpleGrid columns="4" gap="1rem">
+  //       {children}
+  //     </SimpleGrid>
+  //   </Container>
+  // );
 };
 
 export default AssetDisplay;
