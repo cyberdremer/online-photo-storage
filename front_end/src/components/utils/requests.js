@@ -51,12 +51,14 @@ const deleteFile = async (fileId, token) => {
 };
 
 const postFile = async (folderId, file, token) => {
+  const uploadFileFormData = new FormData();
+  uploadFileFormData.append("uploadedFile", file[0]);
   const response = await fetch(`http://localhost:4000/file/${folderId}`, {
     method: "post",
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    body: file,
+    body: uploadFileFormData,
   });
   const data = await response.json();
   if (!response.ok) {
@@ -104,14 +106,17 @@ const postFolder = async (parentFolderid, folder, token) => {
   const formData = formToObject(folder);
   const query = new URLSearchParams(formData).toString();
 
-  const response = await fetch(`http://localhost:4000/folder/${parentFolderid}`, {
-    method: "post",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: query,
-  });
+  const response = await fetch(
+    `http://localhost:4000/folder/${parentFolderid}`,
+    {
+      method: "post",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: query,
+    }
+  );
   const data = await response.json();
 
   if (!response.ok) {
@@ -120,17 +125,20 @@ const postFolder = async (parentFolderid, folder, token) => {
   return data;
 };
 
-const renameFolder = async (folderId, name, token) => {
-  const formData = formToObject(name);
+const renameFolder = async (parentFolderId, folderId, newName, token) => {
+  const formData = formToObject(newName);
   const query = new URLSearchParams(formData).toString();
-  const response = await fetch(`http://localhost:4000/folder/${folderId}`, {
-    method: "put",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: query,
-  });
+  const response = await fetch(
+    `http://localhost:4000/folder/${parentFolderId}/${folderId}`,
+    {
+      method: "put",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: query,
+    }
+  );
   const data = await response.json();
   if (!response.ok) {
     throw new Error(data.error.message || response.statusText);
@@ -162,5 +170,5 @@ export {
   renameFolder,
   downloadFile,
   renameFile,
-  deleteFolder
+  deleteFolder,
 };
