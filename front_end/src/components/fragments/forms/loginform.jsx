@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Field, Fieldset, Input, Button, Stack, Alert } from "@chakra-ui/react";
+import { Field, Fieldset, Input, Button, Stack, Alert, Portal } from "@chakra-ui/react";
 import { AuthContext } from "../../context/auth";
 import { formPostRequest } from "../../utils/requests";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import { ErrorAlert, SuccessAlert } from "../alerts/alerts";
 const LoginForm = () => {
   const { setCookie, updateAuthenticationStatus, updateUserToken } =
     useContext(AuthContext);
-  const { initUser } = useContext(UserContext);
+  const { initUser, user } = useContext(UserContext);
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState({
@@ -41,7 +41,7 @@ const LoginForm = () => {
       updateAuthenticationStatus();
       setLoggedIn(true);
       setTimeout(() => {
-        navigate("/view-assets");
+        navigate(`/view-assets/folders`);
       }, 3000);
     } catch (err) {
       setError({
@@ -59,15 +59,16 @@ const LoginForm = () => {
 
   return (
     <>
-      <Stack alignSelf={"center"} gap="4" maxW="lg">
-        {error.occurred && <ErrorAlert message={error.message}></ErrorAlert>}
-        {loggedIn && (
-          <SuccessAlert
-            message={
-              "You are now logged in! Redirecing you to your dave.save assets!"
-            }
-          ></SuccessAlert>
-        )}
+    
+      <Stack alignSelf={"center"} gap="4" maxW="lg" animationName="fade-in" animationDuration="slowest" minHeight="100vh">
+          {error.occurred && <ErrorAlert message={error.message}></ErrorAlert>}
+          {loggedIn && (
+            <SuccessAlert
+              message={
+                "You are now logged in! Redirecing you to your dave.save assets!"
+              }
+            ></SuccessAlert>
+          )}
         <Fieldset.Root>
           <Stack gap="4" maxW="lg">
             <Fieldset.Legend fontSize="4xl">Login Details</Fieldset.Legend>

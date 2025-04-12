@@ -61,7 +61,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <Stack gap="4" alignSelf={"center"} maxW="lg">
+    <Stack gap="4" alignSelf={"center"} maxW="lg" style={{paddingBottom: "2rem"}}>
       {error.errorBool && (
         <Alert.Root status="error">
           <Alert.Indicator />
@@ -74,7 +74,7 @@ const SignUpForm = () => {
           <Alert.Title>{createAccount.message}</Alert.Title>
         </Alert.Root>
       )}
-      <Fieldset.Root>
+      <Fieldset.Root animationName="fade-in" animationDuration="slowest">
         <Stack gap="4" maxW="lg">
           <Fieldset.Legend fontSize="4xl">Account Details</Fieldset.Legend>
           <Fieldset.HelperText fontSize="xl">

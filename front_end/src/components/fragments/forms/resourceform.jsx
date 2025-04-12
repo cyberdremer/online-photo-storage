@@ -11,11 +11,13 @@ const ResourceForm = ({
   name,
   title = "",
 }) => {
-  const [resourceName, setResourceName] = useState("");
+  const [resourceName, setResourceName] = useState({
+    name: "",
+  });
 
   const handleChange = (e) => {
-    const resourceName = e.target.name;
-    setResourceName(resourceName);
+    const input = e.target.value;
+    setResourceName({ ...resourceName, name: input });
   };
 
   return (
@@ -31,7 +33,7 @@ const ResourceForm = ({
           <Input name="name" onChange={handleChange}></Input>
         </Field.Root>
       </Fieldset.Content>
-      <Button type="submit" onClick={() => handleSubmission(e, name)}>
+      <Button type="submit" onClick={() => handleSubmission(resourceName)}>
         Create
       </Button>
     </Fieldset.Root>
