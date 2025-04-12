@@ -20,7 +20,7 @@ const DeleteAlert = ({ deleteTitle, assetType, open, deleteAction, handleClose }
 
             <Dialog.Footer>
               <Dialog.ActionTrigger asChild>
-                <Button variant="outline">Cancel</Button>
+                <Button variant="outline" onClick={handleClose}>Cancel</Button>
               </Dialog.ActionTrigger>
               <Button colorPalette="red" onClick={deleteAction}>Delete</Button>
             </Dialog.Footer>
@@ -37,7 +37,7 @@ const DeleteAlert = ({ deleteTitle, assetType, open, deleteAction, handleClose }
 const SuccessAlert = ({ message }) => {
   return (
     
-      <Alert.Root status="success" variant="subtle">
+      <Alert.Root status="success" variant="subtle" animationName = "slide-from-top" animationDuration="slowest">
         <Alert.Indicator />
         <Alert.Title>{message}</Alert.Title>
       </Alert.Root>
@@ -48,7 +48,7 @@ const SuccessAlert = ({ message }) => {
 const ErrorAlert = ({ message }) => {
   return (
     
-      <Alert.Root status="error" variant="subtle">
+      <Alert.Root status="error" variant="subtle" animationName ="slide-from-top" animationDuration="slowest">
         <Alert.Indicator />
         <Alert.Title>{message}</Alert.Title>
       </Alert.Root>
