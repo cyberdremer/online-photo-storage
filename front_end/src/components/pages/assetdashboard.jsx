@@ -37,6 +37,7 @@ import FileUploadBox from "../fragments/forms/fileupload";
 import FolderDisplay from "../fragments/displays/folderdisplay";
 import ResourceForm from "../fragments/forms/resourceform";
 import ModalReducer from "../reducers/modalreducer";
+import download from "downloadjs";
 
 const initialModalState = {
   fileDelete: false,
@@ -193,12 +194,15 @@ const AssetDashboard = () => {
     }
   };
 
-  const handleFileDownload = async () => {
+  const handleFileDownload = async (e) => {
     try {
-      const response = await downloadFile(fileRef.current, cookie.usertoken);
-      if (response.error) {
-        throw new Error(response.error.message);
-      }
+      currentlySelectedFileRef.current = e.target.id;
+      const { filename, file } = await downloadFile(
+        currentlySelectedFileRef.current,
+        cookie.usertoken
+      );
+      download(file, filename);
+
       setRequestSuccess({
         status: true,
         message: response.data.message,
