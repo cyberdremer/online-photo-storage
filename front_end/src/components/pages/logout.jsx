@@ -11,7 +11,7 @@ const LogOut = () => {
   }, []);
 
   return (
-    <Flex direction="column" padding="1rem">
+    <Flex direction="column" minHeight="100vh">
       <Header></Header>
       <LogOutBlurb></LogOutBlurb>
       <Footer></Footer>

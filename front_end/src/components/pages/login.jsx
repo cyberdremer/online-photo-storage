@@ -4,7 +4,7 @@ import LoginForm from "../fragments/forms/loginform";
 import { Flex } from "@chakra-ui/react";
 const Login = () => {
   return (
-    <Flex direction="column">
+    <Flex direction="column" >
       <Header></Header>
       <LoginForm></LoginForm>
       <Footer></Footer>

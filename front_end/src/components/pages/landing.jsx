@@ -5,7 +5,7 @@ import { Flex } from "@chakra-ui/react";
 const Landing = () => {
   return (
     <>
-      <Flex grow="1" direction="column" minHeight="100%">
+      <Flex grow="1" direction="column" minHeight="100vh">
         <Header></Header>
         <LandingBlurb></LandingBlurb>
         <Footer></Footer>

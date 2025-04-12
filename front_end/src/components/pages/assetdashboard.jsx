@@ -386,7 +386,7 @@ const AssetDashboard = () => {
 
   return (
     <>
-      <Flex grow="1" direction="column">
+      <Flex grow="1" direction="column" minH="100vh">
         <Header></Header>
         <Portal>
           {requestError.status && (

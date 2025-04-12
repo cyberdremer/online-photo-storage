@@ -4,7 +4,7 @@ import SignUpForm from "../fragments/forms/signupform";
 import { Flex } from "@chakra-ui/react";
 const SignUp = () => {
   return (
-    <Flex direction="column">
+    <Flex direction="column" minHeight="100vh">
       <Header></Header>
       <SignUpForm></SignUpForm>
       <Footer></Footer>
