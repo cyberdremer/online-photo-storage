@@ -13,7 +13,7 @@ const useFetchAssets = (folderId) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${folderUrl + folderId}`, {
+        const response = await fetch(`${folderUrl + '/' + folderId}`, {
           method: "get",
           headers: {
             "Content-Type": "application/json",
