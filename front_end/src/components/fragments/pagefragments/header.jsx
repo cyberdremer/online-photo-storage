@@ -15,10 +15,10 @@ const Header = ({}) => {
         maxHeight={"5rem"}
         alignItems="center"
       >
-        <Link href="/" fontSize="4xl" margin="1rem">
+        <Link href="/" fontSize="4xl" margin="1rem" animationName="slide-from-left-full" animationDuration="slowest">
           &gt; &gt; dave.save
         </Link>
-        <Group gap="1rem">
+        <Group animationName="slide-from-left-full" animationDuration="slowest" gap="1rem">
           <ColorModeButton></ColorModeButton>
           {authed ? (
             <>
