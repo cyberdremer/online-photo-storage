@@ -479,7 +479,7 @@ const AssetDashboard = () => {
         ></DeleteAlert>
 
         <AssetDisplay loading={loading} error={error} items={items}>
-          <SimpleGrid columns="4" gap="1rem">
+          <SimpleGrid gridTemplateColumns="repeat(auto-fit, minmax(200px, 1fr))" gap="1rem">
             <FolderDisplay
               folders={items.folders}
               handleOpen={handleFolderChange}
