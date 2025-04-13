@@ -19,6 +19,9 @@
 - __Misc__: Passport.js, Chakra-UI, react-cookies
 
 ## Screenshots
+![Landing Page] (./screenshots/landing.png)
+![Vault Page] (./screenshots/vault.png)
+![Empty folder page] (./screenshots/empty.png)
 
 ## Installation
 
