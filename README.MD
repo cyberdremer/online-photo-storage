@@ -27,7 +27,6 @@
 ```
 git clone git@github.com:cyberdremer/online-photo-storage.git
 cd online-photo-storage
-
 ```
 
 2. Install dependencies for the front-end:
@@ -49,7 +48,6 @@ npm install
 ```
 PORT=
 DATABASE_URL=
-
 JWTTOKENSECRET=
 JWTREFRESHTOKENSECRET=
 NODE_ENV=
@@ -73,7 +71,6 @@ node --watch app.js
 ```
 cd front_end
 npm run dev
-
 ```
 
 8. Access the front end by going over to http:localhost:${PORT}, with port being the port you designated in your .env file
