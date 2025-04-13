@@ -15,7 +15,7 @@ const createFolder = [
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw new ErrorWithStatusCode(errors.array(), 409);
+      throw new ErrorWithStatusCode(errors.array(), 403);
     }
 
     const folders = await prisma.folder.findFirst({
@@ -35,6 +35,13 @@ const createFolder = [
         ownerid: req.user.id,
         parentid: parentFolderId,
       },
+      include: {
+        files: {
+          select: {
+            size: true
+          },
+        },
+      },
     });
 
     return res.status(201).json({
@@ -46,6 +53,7 @@ const createFolder = [
           createdat: createdFolder.createdat,
           updatedat: createdFolder.updatedat,
           id: createdFolder.id,
+          files: createdFolder.files,
         },
       },
     });
@@ -119,24 +127,30 @@ const updateFolder = [
   passport.authenticate("jwt", { session: false }),
   folderValidation,
   asyncHandler(async (req, res, next) => {
-    let folderId = req.params.folderId || req.user.folders[0].id;
+    let parentFolderId = req.params.parentFolderId || req.user.folders[0].id;
+    let folderId = req.params.folderId || undefined;
+    if (!folderId) {
+      throw new ErrorWithStatusCode("Folder Id was not sent in request!", 403);
+    }
     folderId = Number(folderId);
+    parentFolderId = Number(parentFolderId);
 
     const newName = req.body.name;
 
-    const folder = await prisma.folder.findFirst({
+    const folder = await prisma.folder.findMany({
       where: {
         name: newName,
-        id: Number(folderId),
+        ownerid: req.user.id,
+        parentid: parentFolderId,
       },
     });
-    if (folder) {
+    if (folder.length !== 0) {
       throw new ErrorWithStatusCode(
         "Folder name already exists! Select a new folder name! ",
         409
       );
     }
-    await prisma.folder.update({
+    const updatedFolderInfo = await prisma.folder.update({
       where: {
         ownerid: req.user.id,
         id: Number(folderId),
@@ -144,12 +158,20 @@ const updateFolder = [
       data: {
         name: newName,
       },
+      select: {
+        updatedat: true,
+        name: true,
+      },
     });
 
     return res.status(201).json({
       data: {
         message: `Updated folder! Folder was renamed to ${newName}`,
         status: 201,
+        folderInfo: {
+          name: updatedFolderInfo.name,
+          updatedat: updatedFolderInfo.updatedat,
+        },
       },
     });
   }),
@@ -185,7 +207,7 @@ const getFoldersAndFiles = [
           createdat: true,
           updatedat: true,
           id: true,
-          size: true
+          size: true,
         },
       }),
     ]);
