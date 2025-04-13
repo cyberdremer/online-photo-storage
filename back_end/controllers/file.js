@@ -47,6 +47,7 @@ const uploadFile = [
           size: uploadedFile.size,
           createdAt: uploadedFile.createdat,
           updatedAt: uploadedFile.updatedat,
+          id: uploadedFile.id,
         },
       },
     });
@@ -160,6 +161,10 @@ const updateFileName = [
       data: {
         name: req.body.name,
       },
+      select: {
+        name: true,
+        updatedat: true,
+      },
     });
 
     return res.status(201).json({
@@ -168,6 +173,7 @@ const updateFileName = [
         status: 201,
         fileInfo: {
           updatedat: updatedFile.updatedat,
+          name: updateFileName.name,
         },
       },
     });
