@@ -12,13 +12,14 @@ import {
   Text,
   Highlight
 } from "@chakra-ui/react";
+import { BsFolder2Open } from "react-icons/bs";
 
 import { FaFolderOpen } from "react-icons/fa";
 
 const AssetDisplay = ({ children, loading, error, items }) => {
   if (loading) {
     return (
-      <Stack alignSelf="center" flex="1">
+      <Stack alignSelf="center" flex="1" animationName="pulse" animationDuration="slowest">
         <ProgressCircle.Root value={null} size="xl">
           <ProgressCircle.Circle>
             <ProgressCircle.Track></ProgressCircle.Track>
@@ -42,7 +43,7 @@ const AssetDisplay = ({ children, loading, error, items }) => {
     return (
       <Stack alignSelf="center" padding="1rem" animationName="fade-in" animationDuration="slowest" flex="1">
         <Icon alignSelf="center">
-          <FaFolderOpen size="10rem"></FaFolderOpen>
+          <BsFolder2Open size="10rem"></BsFolder2Open>
         </Icon>
         
           <Text fontSize="xl" lineClamp="4">
