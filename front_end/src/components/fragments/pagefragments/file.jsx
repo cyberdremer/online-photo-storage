@@ -35,7 +35,7 @@ const File = ({
 
   return (
     <GridItem id={id}>
-      <Box maxW="sm" borderWidth="1px" minH="3rem" animationName="fade-in" animationDuration="slowest">
+      <Box maxW="sm" borderWidth="1px" minH="6rem" animationName="fade-in" animationDuration="slowest">
         <Box p="4" spaceY="2">
           <HStack>
             <VStack alignItems="flex-start" textStyle="sm">
