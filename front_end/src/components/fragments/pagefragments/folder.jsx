@@ -28,12 +28,20 @@ const Folder = ({
 }) => {
   const [infoVisible, setInfoVisible] = useState(false);
 
+  
+
   const displayExtraInfo = () => {
     setInfoVisible(!infoVisible);
   };
   return (
     <GridItem id={id}>
-      <Box maxW="sm" borderWidth="1px" minH="3rem" animationName="fade-in" animationDuration="slowest">
+      <Box
+        maxW="sm"
+        borderWidth="1px"
+        minH="4rem"
+        animationName="fade-in"
+        animationDuration="slowest"
+      >
         <Box p="4" spaceY="2">
           <HStack>
             <VStack alignItems="flex-start">
@@ -42,8 +50,8 @@ const Folder = ({
               <Text textStyle="sm">
                 Total Size:{" "}
                 <FormatByte
-                  value={files.reduce((curr, total) => {
-                    return curr.size + total;
+                  value={files.reduce((total, currrentFolder) => {
+                    return total + currrentFolder.size;
                   }, 0)}
                 >
                   {" "}
@@ -71,7 +79,9 @@ const Folder = ({
                       id={id}
                       data-folder-name={name}
                       // TODO fix bug relating to names not rendering on the breadcrumbs
-                    >Open Folder</Menu.Item>
+                    >
+                      Open Folder
+                    </Menu.Item>
                     <Menu.Item
                       value="delete-folder"
                       onClick={(e) => handleDelete(e)}
@@ -84,7 +94,6 @@ const Folder = ({
                       onClick={(e) => handleRename(e)}
                       id={id}
                       name={name}
-                      
                     >
                       Rename Folder
                     </Menu.Item>
