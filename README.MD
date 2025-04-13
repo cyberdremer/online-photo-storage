@@ -6,17 +6,17 @@
 
 ## Features
 
-- ==Account Creation==: Users can create an account and login to said account.
-- ==Folder Creation==: Users can create folders and folders within folders to store their files.
-- ==File Upload==: Users can upload files, rename files and delete them.
+- __Account Creation__: Users can create an account and login to said account.
+- __Folder Creation__: Users can create folders and folders within folders to store their files.
+- __File Upload__: Users can upload files, rename files and delete them.
 
 ## Tech Used
 
-- ==Frontend==: React, Javascript
-- ==Backend==: Nodejs, Express, Javascript
-- ==Database==: Postgress
-- ==Asset Storage==: Cloudinary
-- ==Misc==: Passport.js, Chakra-UI, react-cookies
+- __Frontend__: React, Javascript
+- __Backend__: Nodejs, Express, Javascript
+- __Database__: Postgress
+- __Asset Storage__: Cloudinary
+- __Misc__: Passport.js, Chakra-UI, react-cookies
 
 ## Screenshots
 
@@ -40,7 +40,6 @@ npm install
 3. Install dependencies for the back-end:
 
 ```
-
 cd back_end
 npm install
 ```
@@ -70,7 +69,11 @@ node --watch app.js
 ```
 
 7. Start the front end
-   `cd front_end
-npm run dev`
+
+```
+cd front_end
+npm run dev
+
+```
 
 8. Access the front end by going over to http:localhost:${PORT}, with port being the port you designated in your .env file
