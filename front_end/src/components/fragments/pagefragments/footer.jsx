@@ -2,7 +2,7 @@ import { Text, Link, List, Container } from "@chakra-ui/react";
 
 const Footer = () => {
   return (
-    <Container minW="100%" maxW="100%" padding="0" margin="0">
+    <Container minW="100%" maxW="100%" padding="0" margin="0" animationName="slide-from-left-full" animationDuration="slowest">
       <footer
         style={{
           
