@@ -10,13 +10,22 @@ const LogOutBlurb = () => {
   return (
     <>
       <Container flex="2">
-        <VStack alignItems="self-start" padding="1rem">
-          <Heading> You are now logged out!</Heading>
-          <Text>
+        <VStack
+          alignItems="self-start"
+          padding="1rem"
+          justifyContent="space-evenly"
+          minHeight="100vh"
+          animationName="fade-in"
+          animationDuration="slowest"
+        >
+          <Heading fontSize="6xl" justifySelf="normal"> You are now logged out!</Heading>
+          <Text fontSize="2xl">
             {" "}
             If you would like to return to the hompage, click the button below!
           </Text>
-          <Button onClick={handleHomePageReturn}>Homepage</Button>
+          <Button onClick={handleHomePageReturn} alignSelf="flex-start">
+            Homepage
+          </Button>
         </VStack>
       </Container>
     </>
