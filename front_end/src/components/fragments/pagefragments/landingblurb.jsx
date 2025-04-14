@@ -1,21 +1,46 @@
-import { Button, Text, Highlight, Flex, Heading, List, Container } from "@chakra-ui/react";
+import {
+  Button,
+  Text,
+  Highlight,
+  Flex,
+  Heading,
+  List,
+  Container,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useColorMode, useColorModeValue } from "@/components/ui/color-mode";
+import ModeColors from "@/components/utils/modecolors";
 const LandingBlurb = () => {
   const navigate = useNavigate();
-
   const handleGetStarted = () => {
     navigate("/signup");
   };
+
+  const { secondary, primaryText, secondaryText, buttonText, buttonBackground, accent } =
+    ModeColors();
+
   return (
-    <Flex direction="column" gap="3rem" grow="2" margin="2rem" marginBottom="2.5rem" flex="2" animationName="fade-in" animationDuration="slowest">
+    <Flex
+      direction="column"
+      gap="3rem"
+      grow="3"
+      paddingTop="2rem"
+      paddingBottom="2rem"
+      flex="2"
+      animationName="fade-in"
+      animationDuration="slowest"
+      backgroundColor={secondary}
+    >
       <Container alignSelf={"center"} gap="1rem">
         <section>
-          <Heading size="5xl">&gt; &gt;Secure.Fast.Reliable</Heading>
-          <Text textStyle="xl">
-            <Highlight query="Upload, share, and manage">
+          <Heading size="5xl" color={primaryText}>
+            &gt; &gt;Secure.Fast.Reliable
+          </Heading>
+          <Text textStyle="xl" color={primaryText}>
+            <Highlight query="Upload, share, and manage" color={accent}>
               Upload, share, and manage your files with Dave.Save. Wether you're
-              looking to store files or collaborate with your team, Dave.Save has
-              got you covered!
+              looking to store files or collaborate with your team, Dave.Save
+              has got you covered!
             </Highlight>
           </Text>
         </section>
@@ -23,17 +48,19 @@ const LandingBlurb = () => {
 
       <Container>
         <section>
-          <Heading size="5xl">&gt; &gt;Why Dave.Save?</Heading>
+          <Heading size="5xl" color={primaryText}>
+            &gt; &gt;Why Dave.Save?
+          </Heading>
           <List.Root padding={"1rem"}>
             <List.Item>
-              <Text textStyle="xl">
+              <Text textStyle="xl" color={secondaryText}>
                 <Highlight query="Speedy Uploads">
                   Speedy Uploads: Enjoy fast uploads with no hassle!
                 </Highlight>
               </Text>
             </List.Item>
             <List.Item>
-              <Text textStyle="xl">
+              <Text textStyle="xl" color={secondaryText}>
                 <Highlight query="Enhanced Security">
                   Enhanced Security: Your files are protected with topnotch
                   security
@@ -41,7 +68,7 @@ const LandingBlurb = () => {
               </Text>
             </List.Item>
             <List.Item>
-              <Text textStyle="xl">
+              <Text textStyle="xl" color={secondaryText}>
                 <Highlight query="User-Friendly Interface">
                   User-Friendly Interface: A simple and intuitive design for a
                   seamless experience
@@ -51,13 +78,19 @@ const LandingBlurb = () => {
           </List.Root>
         </section>
       </Container>
-      <Container gap= "1rem">
-        <section >
-          <Heading size="5xl">&gt; &gt;Get Started Today!</Heading>
-          <Text textStyle="xl">Click the button below to begin your journey with Dave.Save</Text>
-          <Button size="lg" onClick={handleGetStarted}>Get Started</Button>
+      <Container gap="1rem">
+        <section>
+          <Heading size="5xl" color={primaryText}>
+            &gt; &gt;Get Started Today!
+          </Heading>
+          <Text textStyle="xl" color={secondaryText}>
+            Click the button below to begin your journey with Dave.Save
+          </Text>
+          <Button size="lg" color={buttonBackground} onClick={handleGetStarted}>
+            <Text color={buttonText}>Sign Up!</Text>
+          </Button>
         </section>
-      </Container> 
+      </Container>
     </Flex>
   );
 };

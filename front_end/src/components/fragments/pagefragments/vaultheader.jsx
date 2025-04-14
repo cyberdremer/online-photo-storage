@@ -11,6 +11,7 @@ import { FaFolderPlus, FaFileUpload, FaSadCry } from "react-icons/fa";
 import { UserContext } from "../../context/userinfo";
 import { Link } from "react-router-dom";
 import FolderBreadCrumbs from "./folderbreadcrumbs";
+import ModeColors from "@/components/utils/modecolors";
 
 const VaultHeader = ({
   displayFileModal,
@@ -18,11 +19,20 @@ const VaultHeader = ({
   folderHistory,
   updateFolderHistory,
 }) => {
+  const { primary, buttonBackground, buttonText } = ModeColors();
 
   return (
     <>
-      <HStack justifyContent="space-between" alignItems="center" padding="1rem">
-        <FolderBreadCrumbs folderHistory={folderHistory} updateFolderHistory={updateFolderHistory}></FolderBreadCrumbs>
+      <HStack
+        justifyContent="space-between"
+        alignItems="center"
+        padding="1rem"
+        backgroundColor={primary}
+      >
+        <FolderBreadCrumbs
+          folderHistory={folderHistory}
+          updateFolderHistory={updateFolderHistory}
+        ></FolderBreadCrumbs>
         <Group gap="1rem">
           <IconButton onClick={displayFolderModal}>
             <FaFolderPlus></FaFolderPlus>

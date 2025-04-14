@@ -15,6 +15,7 @@ import { FaFolder } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState } from "react";
 import truncateString from "@/components/utils/stringformatter";
+import ModeColors from "@/components/utils/modecolors";
 const Folder = ({
   name,
   createdat,
@@ -27,7 +28,7 @@ const Folder = ({
   handleDelete,
 }) => {
   const [infoVisible, setInfoVisible] = useState(false);
-
+  const {primary, secondary, primaryText, secondaryText} = ModeColors();
   
 
   const displayExtraInfo = () => {
@@ -38,16 +39,19 @@ const Folder = ({
       <Box
         maxW="sm"
         borderWidth="1px"
-        minH="4rem"
+        minH="6rem"
         animationName="fade-in"
         animationDuration="slowest"
+        backgroundColor={primary}
+        borderRadius={10}
+        shadow={"2xl"}
       >
         <Box p="4" spaceY="2">
           <HStack>
             <VStack alignItems="flex-start">
               <FaFolder size="5rem"></FaFolder>
-              <Text textStyle="sm">{truncateString(name, 15)}</Text>
-              <Text textStyle="sm">
+              <Text textStyle="sm" color={primaryText}>{truncateString(name, 15)}</Text>
+              <Text textStyle="sm" color={primaryText}>
                 Total Size:{" "}
                 <FormatByte
                   value={files.reduce((total, currrentFolder) => {
@@ -59,8 +63,8 @@ const Folder = ({
               </Text>
               {infoVisible && (
                 <>
-                  <Text textStyle="sm">Created At: {createdat}</Text>
-                  <Text textStyle="sm">Updated At: {updatedat}</Text>
+                  <Text color={primaryText} textStyle="sm">Created At: {createdat}</Text>
+                  <Text color={primaryText} textStyle="sm">Updated At: {updatedat}</Text>
                 </>
               )}
             </VStack>
@@ -72,12 +76,13 @@ const Folder = ({
               </Menu.Trigger>
               <Portal>
                 <Menu.Positioner>
-                  <Menu.Content>
+                  <Menu.Content backgroundColor={secondary}>
                     <Menu.Item
                       value="open-folder"
                       onClick={(e) => handleOpen(e)}
                       id={id}
                       data-folder-name={name}
+                      color={secondaryText}
                       // TODO fix bug relating to names not rendering on the breadcrumbs
                     >
                       Open Folder
@@ -86,6 +91,7 @@ const Folder = ({
                       value="delete-folder"
                       onClick={(e) => handleDelete(e)}
                       id={id}
+                      color={secondaryText}
                     >
                       Delete Folder
                     </Menu.Item>
@@ -94,12 +100,14 @@ const Folder = ({
                       onClick={(e) => handleRename(e)}
                       id={id}
                       name={name}
+                      color={secondaryText}
                     >
                       Rename Folder
                     </Menu.Item>
                     <Menu.Item
                       value="display-folder-info"
                       onClick={displayExtraInfo}
+                      color={secondaryText}
                     >
                       {infoVisible ? "Hide Folder Info" : "Display Folder Info"}
                     </Menu.Item>

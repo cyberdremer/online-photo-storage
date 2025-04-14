@@ -1,4 +1,5 @@
-import { Container, Heading, Text, VStack, Button } from "@chakra-ui/react";
+import ModeColors from "@/components/utils/modecolors";
+import { Container, Heading, Text, VStack, Button} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 const LogOutBlurb = () => {
@@ -7,9 +8,18 @@ const LogOutBlurb = () => {
     navigate("/");
   };
 
+  const {
+    primary,
+    secondary,
+    secondaryText,
+    primaryText,
+    buttonText,
+    buttonBackground,
+  } = ModeColors();
+
   return (
     <>
-      <Container flex="2">
+      <Container flex="2" backgroundColor={secondary} minW="100%">
         <VStack
           alignItems="self-start"
           padding="1rem"
@@ -18,13 +28,16 @@ const LogOutBlurb = () => {
           animationName="fade-in"
           animationDuration="slowest"
         >
-          <Heading fontSize="6xl" justifySelf="normal"> You are now logged out!</Heading>
-          <Text fontSize="2xl">
+          <Heading fontSize="6xl" justifySelf="normal" color={primaryText}>
+            {" "}
+            You are now logged out!
+          </Heading>
+          <Text fontSize="2xl" color={secondaryText}>
             {" "}
             If you would like to return to the hompage, click the button below!
           </Text>
-          <Button onClick={handleHomePageReturn} alignSelf="flex-start">
-            Homepage
+          <Button onClick={handleHomePageReturn} color={buttonBackground}alignSelf="flex-start">
+            <Text color={buttonText}>Homepage</Text>
           </Button>
         </VStack>
       </Container>
