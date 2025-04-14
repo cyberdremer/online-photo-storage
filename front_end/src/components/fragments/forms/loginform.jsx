@@ -1,13 +1,26 @@
 import { useContext, useState } from "react";
-import { Field, Fieldset, Input, Button, Stack, Alert, Portal } from "@chakra-ui/react";
+import {
+  Field,
+  Fieldset,
+  Input,
+  Button,
+  Stack,
+  Alert,
+  Portal,
+  Text,
+} from "@chakra-ui/react";
 import { AuthContext } from "../../context/auth";
 import { formPostRequest } from "../../utils/requests";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "@/components/context/userinfo";
 import { ErrorAlert, SuccessAlert } from "../alerts/alerts";
+import { useColorModeValue } from "@/components/ui/color-mode";
+import ModeColors from "@/components/utils/modecolors";
 
 const LoginForm = () => {
-  const { setCookie, updateAuthenticationStatus, updateUserToken } =
+  const { primaryText, secondary, inputfieldColors, secondaryText } =
+    ModeColors();
+  const { updateUserToken, updateAuthenticationStatus } =
     useContext(AuthContext);
   const { initUser, user } = useContext(UserContext);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -59,38 +72,52 @@ const LoginForm = () => {
 
   return (
     <>
-    
-      <Stack alignSelf={"center"} gap="4" maxW="lg" animationName="fade-in" animationDuration="slowest" minHeight="100vh">
-          {error.occurred && <ErrorAlert message={error.message}></ErrorAlert>}
-          {loggedIn && (
-            <SuccessAlert
-              message={
-                "You are now logged in! Redirecing you to your dave.save assets!"
-              }
-            ></SuccessAlert>
-          )}
-        <Fieldset.Root>
+      <Stack
+        alignSelf={"center"}
+        gap="4"
+        minW="100%"
+        minHeight="100vh"
+        paddingTop="4rem"
+        backgroundColor={secondary}
+      >
+        {error.occurred && <ErrorAlert message={error.message}></ErrorAlert>}
+        {loggedIn && (
+          <SuccessAlert
+            message={
+              "You are now logged in! Redirecing you to your dave.save assets!"
+            }
+          ></SuccessAlert>
+        )}
+        <Fieldset.Root
+          alignItems="center"
+          animationName="fade-in"
+          animationDuration="slowest"
+        >
           <Stack gap="4" maxW="lg">
             <Fieldset.Legend fontSize="4xl">Login Details</Fieldset.Legend>
-            <Fieldset.HelperText fontSize="xl">
-              Please enter your details below to login to your Dave.Save
+            <Fieldset.HelperText fontSize="xl" color={primaryText}>
+              <Text color={secondaryText}>
+                Please enter your details below to login to your Dave.Save
+              </Text>
             </Fieldset.HelperText>
             <Stack gap="2rem">
               <Field.Root required>
-                <Field.Label>
+                <Field.Label color={primaryText}>
                   Username <Field.RequiredIndicator></Field.RequiredIndicator>
                 </Field.Label>
                 <Input
+                  backgroundColor={inputfieldColors}
                   variant="subtle"
                   onChange={handleChange}
                   name="username"
                 ></Input>
               </Field.Root>
               <Field.Root required>
-                <Field.Label>
+                <Field.Label color={primaryText}>
                   Password <Field.RequiredIndicator></Field.RequiredIndicator>
                 </Field.Label>
                 <Input
+                  backgroundColor={inputfieldColors}
                   variant="subtle"
                   onChange={handleChange}
                   name="password"
