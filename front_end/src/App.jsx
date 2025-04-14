@@ -6,7 +6,7 @@ import PageRoutes from "./components/pagedata/pageroutes";
 
 const App = ({}) => {
   return (
-    <Container minHeight="100vh" maxWidth="100%" padding="0" margin={"0"}>
+    <Container minHeight="100vh" maxWidth="100%" padding="0" margin={"0"} backgroundColor="background">
         <BrowserRouter>
           <PageRoutes></PageRoutes>
         </BrowserRouter>
