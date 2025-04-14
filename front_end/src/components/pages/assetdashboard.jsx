@@ -38,6 +38,7 @@ import FolderDisplay from "../fragments/displays/folderdisplay";
 import ResourceForm from "../fragments/forms/resourceform";
 import ModalReducer from "../reducers/modalreducer";
 import download from "downloadjs";
+import ModeColors from "../utils/modecolors";
 
 const initialModalState = {
   fileDelete: false,
@@ -50,6 +51,7 @@ const initialModalState = {
 
 const AssetDashboard = () => {
   const { user, updateCurrentFolder } = useContext(UserContext);
+  const {secondary} = ModeColors();
   const { cookie } = useContext(AuthContext);
   const [folderHistory, setFolderHistory] = useState([
     { name: user.currentFolderName, id: user.currentFolderId },
@@ -479,7 +481,7 @@ const AssetDashboard = () => {
         ></DeleteAlert>
 
         <AssetDisplay loading={loading} error={error} items={items}>
-          <SimpleGrid gridTemplateColumns="repeat(auto-fit, minmax(200px, 1fr))" gap="1rem">
+          <SimpleGrid gridTemplateColumns="repeat(auto-fit, minmax(270px, 1fr))" gap="1rem" >
             <FolderDisplay
               folders={items.folders}
               handleOpen={handleFolderChange}
@@ -507,7 +509,6 @@ const AssetDashboard = () => {
             handleRename={changeFileRenameVisbility}
           ></FileDisplay> */}
         </AssetDisplay>
-        <Footer></Footer>
       </Flex>
     </>
   );
