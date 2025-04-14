@@ -17,23 +17,28 @@ const UserProvider = ({ children }) => {
       username: user.username,
       rootFolderId: user.rootFolderId,
       currentFolderId: user.rootFolderId,
-      currentFolderName: "root"
+      currentFolderName: "root",
     });
   };
 
-
-
   const updateCurrentFolder = (currentFolderId, currentFolderName) => {
-    const sanitizedFolderId = user.rootFolderId === currentFolderId ? "" : currentFolderId;
+    const sanitizedFolderId =
+      user.rootFolderId === currentFolderId ? "" : currentFolderId;
     setUser({
       ...user,
       currentFolderId: sanitizedFolderId,
-      currentFolderName: currentFolderName
+      currentFolderName: currentFolderName,
     });
   };
 
+  const removeUser = () => {
+    setUser(null);
+  };
+
   return (
-    <UserContext.Provider value={{ user, initUser, updateCurrentFolder }}>
+    <UserContext.Provider
+      value={{ user, initUser, updateCurrentFolder, removeUser }}
+    >
       {children}
     </UserContext.Provider>
   );
