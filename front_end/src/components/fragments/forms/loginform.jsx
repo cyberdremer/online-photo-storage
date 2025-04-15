@@ -18,7 +18,7 @@ import { useColorModeValue } from "@/components/ui/color-mode";
 import ModeColors from "@/components/utils/modecolors";
 
 const LoginForm = () => {
-  const { primaryText, secondary, inputfieldColors, secondaryText } =
+  const { primaryText, secondary, inputfieldColors, secondaryText, primary } =
     ModeColors();
   const { updateUserToken, updateAuthenticationStatus } =
     useContext(AuthContext);
@@ -72,6 +72,14 @@ const LoginForm = () => {
 
   return (
     <>
+      {error.occurred && <ErrorAlert message={error.message}></ErrorAlert>}
+      {loggedIn && (
+        <SuccessAlert
+          message={
+            "You are now logged in! Redirecing you to your dave.save assets!"
+          }
+        ></SuccessAlert>
+      )}
       <Stack
         alignSelf={"center"}
         gap="4"
@@ -80,20 +88,12 @@ const LoginForm = () => {
         paddingTop="4rem"
         backgroundColor={secondary}
       >
-        {error.occurred && <ErrorAlert message={error.message}></ErrorAlert>}
-        {loggedIn && (
-          <SuccessAlert
-            message={
-              "You are now logged in! Redirecing you to your dave.save assets!"
-            }
-          ></SuccessAlert>
-        )}
         <Fieldset.Root
           alignItems="center"
           animationName="fade-in"
           animationDuration="slowest"
         >
-          <Stack gap="4" maxW="lg">
+          <Stack gap="4" maxW="xl" backgroundColor={secondary}>
             <Fieldset.Legend fontSize="4xl">Login Details</Fieldset.Legend>
             <Fieldset.HelperText fontSize="xl" color={primaryText}>
               <Text color={secondaryText}>
