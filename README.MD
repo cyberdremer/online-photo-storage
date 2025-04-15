@@ -6,22 +6,25 @@
 
 ## Features
 
-- __Account Creation__: Users can create an account and login to said account.
-- __Folder Creation__: Users can create folders and folders within folders to store their files.
-- __File Upload__: Users can upload files, rename files and delete them.
+- **Account Creation**: Users can create an account and login to said account.
+- **Folder Creation**: Users can create folders and folders within folders to store their files.
+- **File Upload**: Users can upload files, rename files and delete them.
 
 ## Tech Used
 
-- __Frontend__: React, Javascript
-- __Backend__: Nodejs, Express, Javascript
-- __Database__: Postgress
-- __Asset Storage__: Cloudinary
-- __Misc__: Passport.js, Chakra-UI, react-cookies
+- **Frontend**: React, Javascript
+- **Backend**: Nodejs, Express, Javascript
+- **Database**: Postgress
+- **Asset Storage**: Cloudinary
+- **Misc**: Passport.js, Chakra-UI, react-cookies
 
 ## Screenshots
-![Landing Page] (./screenshots/landing.png)
-![Vault Page] (./screenshots/vault.png)
-![Empty folder page] (./screenshots/empty.png)
+
+![Image](https://github.com/user-attachments/assets/b6ef4938-a04d-4f96-b4bc-7f6c14eb6d7e)
+
+![Image](https://github.com/user-attachments/assets/4f52c102-dd39-450f-8bc2-0c82e99d31df)
+
+![Image](https://github.com/user-attachments/assets/542b997e-df22-4da0-a58e-1a24480f2839)
 
 ## Installation
 
