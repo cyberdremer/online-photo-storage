@@ -207,7 +207,7 @@ const AssetDashboard = () => {
 
       setRequestSuccess({
         status: true,
-        message: response.data.message,
+        message: "File has been downloaded!"
       });
       setTimeout(() => {
         setRequestSuccess({
