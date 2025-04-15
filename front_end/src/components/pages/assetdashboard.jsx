@@ -51,7 +51,7 @@ const initialModalState = {
 
 const AssetDashboard = () => {
   const { user, updateCurrentFolder } = useContext(UserContext);
-  const {secondary} = ModeColors();
+  const { secondary } = ModeColors();
   const { cookie } = useContext(AuthContext);
   const [folderHistory, setFolderHistory] = useState([
     { name: user.currentFolderName, id: user.currentFolderId },
@@ -136,11 +136,11 @@ const AssetDashboard = () => {
 
       setItems({ ...items, files: newFiles });
       cleanUpRef("displayFilename", currentlySelectedFileRef);
-    } catch (error) {
+    } catch (err) {
       cleanUpRef("displayFileRename", currentlySelectedFileRef);
       setRequestError({
         status: true,
-        message: error.message,
+        message: err.message,
       });
 
       setTimeout(() => {
@@ -180,11 +180,11 @@ const AssetDashboard = () => {
         files: newFiles,
       });
       cleanUpRef("displayFileDelete", currentlySelectedFileRef);
-    } catch (error) {
+    } catch (err) {
       cleanUpRef("displayFileDelete", currentlySelectedFileRef);
       setRequestError({
         status: true,
-        message: error.message,
+        message: err.message,
       });
 
       setTimeout(() => {
@@ -215,10 +215,10 @@ const AssetDashboard = () => {
           message: "",
         });
       }, 10000);
-    } catch (error) {
+    } catch (err) {
       setRequestError({
         status: true,
-        message: error.message,
+        message: err.message,
       });
 
       setTimeout(() => {
@@ -250,11 +250,32 @@ const AssetDashboard = () => {
           size: response.data.fileInfo.size,
         },
       ];
+      setRequestSuccess({
+        status: true,
+        message: response.data.message,
+      });
+      setTimeout(() => {
+        setRequestSuccess({
+          status: false,
+          message: "",
+        });
+      }, 10000);
 
       setItems({ ...items, files: newFileArray });
       cleanUpRef("displayFileUpload", currentlySelectedFileRef);
     } catch (err) {
       cleanUpRef("displayFileUpload", currentlySelectedFileRef);
+      setRequestError({
+        status: true,
+        message: err.message,
+      });
+
+      setTimeout(() => {
+        setRequestError({
+          status: false,
+          message: "",
+        });
+      }, 10000);
     }
   };
 
@@ -291,9 +312,30 @@ const AssetDashboard = () => {
         },
       ];
       setItems({ ...items, folders: newFolderArray });
+      setRequestSuccess({
+        status: true,
+        message: response.data.message,
+      });
+      setTimeout(() => {
+        setRequestSuccess({
+          status: false,
+          message: "",
+        });
+      }, 10000);
       cleanUpRef("displayFolderCreate", currentlySelectedFolderRef);
     } catch (err) {
       cleanUpRef("displayFolderCreate", currentlySelectedFolderRef);
+      setRequestError({
+        status: true,
+        message: err.message,
+      });
+
+      setTimeout(() => {
+        setRequestError({
+          status: false,
+          message: "",
+        });
+      }, 10000);
     }
   };
   const handleFolderRename = async (form) => {
@@ -318,7 +360,7 @@ const AssetDashboard = () => {
           status: false,
           message: "",
         });
-      });
+      }, 10000);
 
       const newFolderArray = items.folders.map((folder) => {
         if (folder.id === Number(currentlySelectedFolderRef.current)) {
@@ -393,20 +435,21 @@ const AssetDashboard = () => {
   return (
     <>
       <Flex grow="1" direction="column" minH="100vh">
+        {requestError.status && (
+          <ErrorAlert message={requestError.message}></ErrorAlert>
+        )}
+        {requestSuccess.status && (
+          <SuccessAlert message={requestSuccess.message}></SuccessAlert>
+        )}
         <Header></Header>
-        <Portal>
-          {requestError.status && (
-            <ErrorAlert message={requestError.message}></ErrorAlert>
-          )}
-          {requestSuccess.status && (
-            <SuccessAlert message={requestSuccess.message}></SuccessAlert>
-          )}
-        </Portal>
+
         <VaultHeader
           displayFileModal={changeFileUploadVisbility}
           displayFolderModal={changeFolderCreateVisbility}
           folderHistory={folderHistory}
           updateFolderHistory={setFolderHistory}
+          items={items}
+          setItems={setItems}
         ></VaultHeader>
         <DeleteAlert
           type="file"
@@ -481,7 +524,10 @@ const AssetDashboard = () => {
         ></DeleteAlert>
 
         <AssetDisplay loading={loading} error={error} items={items}>
-          <SimpleGrid gridTemplateColumns="repeat(auto-fit, minmax(270px, 1fr))" gap="1rem" >
+          <SimpleGrid
+            gridTemplateColumns="repeat(auto-fit, minmax(270px, 1fr))"
+            gap="3rem"
+          >
             <FolderDisplay
               folders={items.folders}
               handleOpen={handleFolderChange}
