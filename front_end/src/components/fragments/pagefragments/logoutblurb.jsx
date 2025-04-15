@@ -19,14 +19,15 @@ const LogOutBlurb = () => {
 
   return (
     <>
-      <Container flex="2" backgroundColor={secondary} minW="100%">
+      <Container flex="2" backgroundColor={secondary} minW="100%" alignSelf="center">
         <VStack
-          alignItems="self-start"
+          
           padding="1rem"
           justifyContent="space-evenly"
           minHeight="100vh"
           animationName="fade-in"
           animationDuration="slowest"
+          alignSelf="center"
         >
           <Heading fontSize="6xl" justifySelf="normal" color={primaryText}>
             {" "}
@@ -36,7 +37,7 @@ const LogOutBlurb = () => {
             {" "}
             If you would like to return to the hompage, click the button below!
           </Text>
-          <Button onClick={handleHomePageReturn} color={buttonBackground}alignSelf="flex-start">
+          <Button onClick={handleHomePageReturn} color={buttonBackground} minW="20%">
             <Text color={buttonText}>Homepage</Text>
           </Button>
         </VStack>
