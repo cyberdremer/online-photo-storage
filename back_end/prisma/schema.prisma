@@ -35,7 +35,7 @@ model Folder {
   subfolders   Folder[] @relation("folderHierarchy")
   parentfolder Folder?  @relation("folderHierarchy", fields: [parentid], references: [id], onDelete: Cascade)
   parentid     Int?
-  files        File[]
+  files        File[]  
 }
 
 model File {
@@ -47,8 +47,8 @@ model File {
   cloudinarypublicid String
   createdat DateTime @default(now())
   updatedat DateTime @updatedAt
-  folder    Folder   @relation(fields: [folderid], references: [id])
+  folder    Folder   @relation(fields: [folderid], references: [id], onDelete: Cascade)
   owner     User     @relation(fields: [ownerid], references: [id])
   ownerid   Int
-  folderid  Int
+  folderid  Int  
 }
