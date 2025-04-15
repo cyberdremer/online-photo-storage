@@ -6,14 +6,14 @@ const formatValidatorError = require("../utils/errorformatter");
 
 const asyncHandler = require("express-async-handler");
 const ErrorWithStatusCode = require("../classes/error");
+const { array } = require("../middleware/multer");
 
 const loginToAccount = [
   logInValidation,
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const errorMessages = formatValidatorError(errors.array());
-      throw new ErrorWithStatusCode(errorMessages[0], 400);
+      throw new ErrorWithStatusCode(errors.array()[0].msg, 400);
     }
 
     passport.authenticate("local", async (err, user, info) => {
