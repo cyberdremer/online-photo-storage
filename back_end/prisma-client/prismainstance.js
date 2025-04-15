@@ -1,9 +1,18 @@
 const { PrismaClient } = require("@prisma/client");
 require("dotenv").config();
-const databaseUrl =
-  process.env.NODE_ENV === "test"
-    ? process.env.TEST_DATABASE_URL
-    : process.env.DATABASE_URL;
+let databaseUrl;
+
+const determineEnvironment = () => {
+  if (process.env.NODE_ENV === "test") {
+    databaseUrl = process.env.TEST_DATABASE_URL;
+  } else if (process.env.NODE_ENV === "dev") {
+    databaseUrl = process.env.DEV_DATABASE_URL;
+  } else {
+    databaseUrl = process.env.RAILWAY_DATABASE_URL;
+  }
+};
+
+determineEnvironment();
 
 const prisma = new PrismaClient({
   datasources: {
@@ -12,7 +21,5 @@ const prisma = new PrismaClient({
     },
   },
 });
-
-
 
 module.exports = prisma;
