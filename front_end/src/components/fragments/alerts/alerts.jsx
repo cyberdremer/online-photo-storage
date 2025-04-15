@@ -1,5 +1,12 @@
 import ModeColors from "@/components/utils/modecolors";
-import { Button, Dialog, Portal, CloseButton, Alert, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Dialog,
+  Portal,
+  CloseButton,
+  Alert,
+  Text,
+} from "@chakra-ui/react";
 import { useState } from "react";
 
 const DeleteAlert = ({
@@ -35,7 +42,7 @@ const DeleteAlert = ({
 
             <Dialog.Footer>
               <Dialog.ActionTrigger asChild>
-                <Button variant="outline" onClick={handleClose} >
+                <Button variant="outline" onClick={handleClose}>
                   <Text>Cancel</Text>
                 </Button>
               </Dialog.ActionTrigger>
@@ -60,6 +67,10 @@ const SuccessAlert = ({ message }) => {
       variant="subtle"
       animationName="slide-from-top"
       animationDuration="slowest"
+      maxW="30%"
+      alignSelf="center"
+      position={"absolute"}
+      marginTop={2}
     >
       <Alert.Indicator />
       <Alert.Title>{message}</Alert.Title>
@@ -74,6 +85,10 @@ const ErrorAlert = ({ message }) => {
       variant="subtle"
       animationName="slide-from-top"
       animationDuration="slowest"
+      maxW="30%"
+      alignSelf="center"
+      position={"absolute"}
+      marginTop={2}
     >
       <Alert.Indicator />
       <Alert.Title>{message}</Alert.Title>
