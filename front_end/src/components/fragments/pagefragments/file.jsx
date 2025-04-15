@@ -107,7 +107,7 @@ const File = ({
       <Box
         maxW="sm"
         borderWidth="1px"
-        minH="6rem"
+        minH="11rem"
         animationName="fade-in"
         animationDuration="slowest"
         backgroundColor={primary}
@@ -116,10 +116,10 @@ const File = ({
       >
         <Box p="4" spaceY="2">
           <HStack>
-            <VStack alignItems="flex-start" textStyle="sm">
+            <VStack alignItems="flex-start" gap="7">
               <FaFile size="5rem"></FaFile>
-              <Text color={primaryText}>{truncateString(name, 18)}</Text>
-              <Text color={secondaryText}>
+              <Text color={primaryText} fontSize={"lg"}>{truncateString(name, 18)}</Text>
+              <Text color={secondaryText} >
                 Size: <FormatByte value={size}></FormatByte>
               </Text>
               {infoVisible && (
