@@ -3,7 +3,10 @@ const errorHandler = require("./middleware/error");
 const topLevelRoute = require("./routes/toplevel");
 const cors = require("cors");
 require("dotenv").config();
-const corsOptions = {}
+
+
+
+
 const app = express();
 app.use(express.urlencoded({limit: '10mb', extended: true }));
 app.use(cors({exposedHeaders: "Access-Control-Expose-Headers"}));
