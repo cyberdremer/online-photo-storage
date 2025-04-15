@@ -39,7 +39,7 @@ const Folder = ({
       <Box
         maxW="sm"
         borderWidth="1px"
-        minH="6rem"
+        minH="11rem"
         animationName="fade-in"
         animationDuration="slowest"
         backgroundColor={primary}
@@ -48,9 +48,10 @@ const Folder = ({
       >
         <Box p="4" spaceY="2">
           <HStack>
-            <VStack alignItems="flex-start">
+            <VStack alignItems="flex-start" gap="7">
               <FaFolder size="5rem"></FaFolder>
-              <Text textStyle="sm" color={primaryText}>{truncateString(name, 15)}</Text>
+              <Text textStyle="sm" color={primaryText} fontSize="lg">{truncateString(name, 15)}</Text>
+              <Text>Number of files: {files.length}</Text>
               <Text textStyle="sm" color={primaryText}>
                 Total Size:{" "}
                 <FormatByte
