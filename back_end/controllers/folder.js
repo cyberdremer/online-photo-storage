@@ -38,7 +38,7 @@ const createFolder = [
       include: {
         files: {
           select: {
-            size: true
+            size: true,
           },
         },
       },
@@ -105,6 +105,7 @@ const deleteFolder = [
     await prisma.folder.delete({
       where: {
         id: folderId,
+        ownerid: req.user.id,
       },
     });
 
@@ -116,7 +117,7 @@ const deleteFolder = [
 
     return res.status(201).json({
       data: {
-        message: `Deleted folder :${folder.name} and it's associated folders and files`,
+        message: `Deleted folder:${folder.name}. It's associated folders and files have been deleted!`,
         status: 201,
       },
     });
