@@ -16,6 +16,7 @@ import { UserContext } from "@/components/context/userinfo";
 import { ErrorAlert, SuccessAlert } from "../alerts/alerts";
 import { useColorModeValue } from "@/components/ui/color-mode";
 import ModeColors from "@/components/utils/modecolors";
+import backendUrl from "@/components/utils/backendurl";
 
 const LoginForm = () => {
   const { primaryText, secondary, inputfieldColors, secondaryText, primary } =
@@ -42,10 +43,7 @@ const LoginForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await formPostRequest(
-        form,
-        `http://localhost:4000/login`
-      );
+      const response = await formPostRequest(form, `${backendUrl + "/login"}`);
       if (response.error) {
         throw new Error(`${response.error.message}`);
       }
