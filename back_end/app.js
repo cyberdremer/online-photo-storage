@@ -2,7 +2,6 @@ const express = require("express");
 const errorHandler = require("./middleware/error");
 const topLevelRoute = require("./routes/toplevel");
 const https = require("https");
-const https = require("https");
 const cors = require("cors");
 const redirectHttpToHttps = require("./middleware/redirecthttp");
 require("dotenv").config();
@@ -22,7 +21,7 @@ app.use(redirectHttpToHttps);
 app.use(topLevelRoute);
 app.use(errorHandler);
 
-https.createServer(app).listen(process.env.PORT, () => {
+httpsServer.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
 });
 // app.listen(process.env.PORT, () => {
