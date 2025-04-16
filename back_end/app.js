@@ -6,17 +6,17 @@ const cors = require("cors");
 const redirectHttpToHttps = require("./middleware/redirecthttp");
 require("dotenv").config();
 
-const key = process.env.HTTPS_SERVER_KEY;
-const cert = process.env.HTTPS_SERVER_CERT;
-const passphrase = process.env.HTTPS_PASSPHRASE;
-const credentials = { key: key, cert: cert, passphrase };
+// const key = process.env.HTTPS_SERVER_KEY;
+// const cert = process.env.HTTPS_SERVER_CERT;
+// const passphrase = process.env.HTTPS_PASSPHRASE;
+// const credentials = { key: key, cert: cert, passphrase };
 const app = express();
 
 const httpsServer = https.createServer(credentials, app);
 
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(cors({ exposedHeaders: "Access-Control-Expose-Headers" }));
-app.use(redirectHttpToHttps);
+// app.use(redirectHttpToHttps);
 
 app.use(topLevelRoute);
 app.use(errorHandler);
