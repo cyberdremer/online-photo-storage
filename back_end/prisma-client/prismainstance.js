@@ -8,7 +8,7 @@ const determineEnvironment = () => {
   } else if (process.env.NODE_ENV === "dev") {
     databaseUrl = process.env.DEV_DATABASE_URL;
   } else {
-    databaseUrl = process.env.RAILWAY_DATABASE_URL;
+    databaseUrl = process.env.DATABASE_PUBLIC_URL;
   }
 };
 
