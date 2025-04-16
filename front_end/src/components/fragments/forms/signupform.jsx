@@ -12,6 +12,7 @@ import { useRef, useState } from "react";
 import { formPostRequest } from "../../utils/requests";
 import ModeColors from "@/components/utils/modecolors";
 import { ErrorAlert, SuccessAlert } from "../alerts/alerts";
+import backendUrl from "@/components/utils/backendurl";
 
 const SignUpForm = () => {
   const containerRef = useRef();
@@ -49,10 +50,7 @@ const SignUpForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await formPostRequest(
-        form,
-        `http://localhost:4000/signup`
-      );
+      const response = await formPostRequest(form, `${backendUrl + "/signup"}`);
       if (response.error) {
         throw new Error(`${response.error.message}`);
       }
