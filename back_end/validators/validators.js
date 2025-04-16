@@ -72,6 +72,15 @@ const signUpValidation = [
       return value === req.body.password;
     })
     .withMessage(`Passwords must match!`),
+
+  body("signupcode")
+    .trim()
+    .notEmpty()
+    .withMessage(`Sign-Up code: ${emptyError}`)
+    .custom(async (value) => {
+      return value === process.env.SIGN_UP_CODE;
+    })
+    .withMessage(`This is not the correct sign-up code! Please try again`),
 ];
 
 const logInValidation = [
