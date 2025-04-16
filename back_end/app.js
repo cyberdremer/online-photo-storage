@@ -12,7 +12,7 @@ require("dotenv").config();
 // const credentials = { key: key, cert: cert, passphrase };
 const app = express();
 
-const httpsServer = https.createServer(credentials, app);
+// const httpsServer = https.createServer(credentials, app);
 
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(cors({ exposedHeaders: "Access-Control-Expose-Headers" }));
@@ -21,9 +21,9 @@ app.use(cors({ exposedHeaders: "Access-Control-Expose-Headers" }));
 app.use(topLevelRoute);
 app.use(errorHandler);
 
-httpsServer.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
-});
-// app.listen(process.env.PORT, () => {
+// httpsServer.listen(process.env.PORT, () => {
 //   console.log(`Server is running on port ${process.env.PORT}`);
 // });
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
+});
