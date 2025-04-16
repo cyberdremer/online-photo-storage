@@ -1,6 +1,8 @@
 import { data } from "react-router-dom";
 import formToObject from "./objecttoform";
+import { configDotenv } from "dotenv";
 
+const backendUrl = `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`;
 const formPostRequest = async (form, url) => {
   // Can throw error that is handled by the caller
   const formData = formToObject(form);
@@ -36,7 +38,7 @@ const getItemsRequest = async (form, url, token) => {
 };
 
 const deleteFile = async (fileId, token) => {
-  const response = await fetch(`http://localhost:4000/file/${fileId}`, {
+  const response = await fetch(`${backendUrl + "/file/" + fileId}`, {
     method: "delete",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -53,13 +55,16 @@ const deleteFile = async (fileId, token) => {
 const postFile = async (folderId, file, token) => {
   const uploadFileFormData = new FormData();
   uploadFileFormData.append("uploadedFile", file[0]);
-  const response = await fetch(`http://localhost:4000/file/${folderId}`, {
-    method: "post",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: uploadFileFormData,
-  });
+  const response = await fetch(
+    `${backendUrl + "/file/" + folderId}`,
+    {
+      method: "post",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: uploadFileFormData,
+    }
+  );
   const data = await response.json();
   if (!response.ok) {
     throw new Error(data.error.message || response.statusText);
@@ -70,7 +75,7 @@ const postFile = async (folderId, file, token) => {
 const renameFile = async (fileId, form, token) => {
   const formData = formToObject(form);
   const query = new URLSearchParams(formData).toString();
-  const response = await fetch(`http://localhost:4000/file/${fileId}`, {
+  const response = await fetch(`${backendUrl + "/file/"+ fileId}`, {
     method: "put",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -88,7 +93,7 @@ const renameFile = async (fileId, form, token) => {
 };
 
 const downloadFile = async (fileId, token) => {
-  const response = await fetch(`http://localhost:4000/file/${fileId}`, {
+  const response = await fetch(`${backendUrl + "/file/" + fileId}`, {
     method: "get",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -109,7 +114,7 @@ const postFolder = async (parentFolderid, folder, token) => {
   const query = new URLSearchParams(formData).toString();
 
   const response = await fetch(
-    `http://localhost:4000/folder/${parentFolderid}`,
+    `${backendUrl + "/folder/"+ parentFolderid}`,
     {
       method: "post",
       headers: {
@@ -131,7 +136,7 @@ const renameFolder = async (parentFolderId, folderId, newName, token) => {
   const formData = formToObject(newName);
   const query = new URLSearchParams(formData).toString();
   const response = await fetch(
-    `http://localhost:4000/folder/${parentFolderId}/${folderId}`,
+    `${backendUrl+"/folder/"}${parentFolderId}/${folderId}`,
     {
       method: "put",
       headers: {
@@ -149,7 +154,7 @@ const renameFolder = async (parentFolderId, folderId, newName, token) => {
 };
 
 const deleteFolder = async (folderId, token) => {
-  const response = await fetch(`http://localhost:4000/folder/${folderId}`, {
+  const response = await fetch(`${backendUrl + "/folder/" + folderId}`, {
     method: "delete",
     headers: {
       Authorization: `Bearer ${token}`,
