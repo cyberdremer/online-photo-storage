@@ -38,6 +38,7 @@ const SignUpForm = () => {
     email: "",
     password: "",
     confirmpassword: "",
+    signupcode: "",
   });
 
   const handleChange = (e) => {
@@ -180,6 +181,19 @@ const SignUpForm = () => {
                   onChange={handleChange}
                   name="confirmpassword"
                   type="password"
+                  backgroundColor={inputfieldColors}
+                ></Input>
+              </Field.Root>
+              <Field.Root required>
+                <Field.Label color={primaryText}>
+                  Sign-up Code{" "}
+                  <Field.RequiredIndicator></Field.RequiredIndicator>
+                </Field.Label>
+
+                <Input
+                  variant="subtle"
+                  onChange={handleChange}
+                  name="signupcode"
                   backgroundColor={inputfieldColors}
                 ></Input>
               </Field.Root>
