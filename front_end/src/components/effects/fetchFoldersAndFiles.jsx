@@ -1,8 +1,9 @@
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../context/auth";
+import backendUrl from "../utils/backendurl";
 const useFetchAssets = (folderId) => {
   const { cookie } = useContext(AuthContext);
-  const [folderUrl, setFolderUrl] = useState("http://localhost:4000/folder");
+  const [folderUrl, setFolderUrl] = useState(`${backendUrl}/folder`);
   const [items, setItems] = useState({
     folders: [],
     files: [],
@@ -13,7 +14,7 @@ const useFetchAssets = (folderId) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${folderUrl + '/' + folderId}`, {
+        const response = await fetch(`${folderUrl + "/" + folderId}`, {
           method: "get",
           headers: {
             "Content-Type": "application/json",
