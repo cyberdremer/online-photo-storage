@@ -1,8 +1,6 @@
 import { data } from "react-router-dom";
 import formToObject from "./objecttoform";
-import { configDotenv } from "dotenv";
 
-const backendUrl = `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`;
 const formPostRequest = async (form, url) => {
   // Can throw error that is handled by the caller
   const formData = formToObject(form);
