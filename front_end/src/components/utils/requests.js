@@ -8,6 +8,7 @@ const formPostRequest = async (form, url) => {
 
   const response = await fetch(url, {
     method: "post",
+    mode: 'cors',
     body: query,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -23,6 +24,7 @@ const formPostRequest = async (form, url) => {
 const getItemsRequest = async (form, url, token) => {
   const response = await fetch(url, {
     method: "get",
+    mode: 'cors',
     headers: {
       Accept: "application/json",
     },
@@ -38,6 +40,7 @@ const getItemsRequest = async (form, url, token) => {
 const deleteFile = async (fileId, token) => {
   const response = await fetch(`${backendUrl + "/file/" + fileId}`, {
     method: "delete",
+    mode: 'cors',
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -57,6 +60,7 @@ const postFile = async (folderId, file, token) => {
     `${backendUrl + "/file/" + folderId}`,
     {
       method: "post",
+      mode: 'cors',
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -75,6 +79,7 @@ const renameFile = async (fileId, form, token) => {
   const query = new URLSearchParams(formData).toString();
   const response = await fetch(`${backendUrl + "/file/"+ fileId}`, {
     method: "put",
+    mode: 'cors',
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/x-www-form-urlencoded",
@@ -93,6 +98,7 @@ const renameFile = async (fileId, form, token) => {
 const downloadFile = async (fileId, token) => {
   const response = await fetch(`${backendUrl + "/file/" + fileId}`, {
     method: "get",
+    mode: 'cors',
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -115,6 +121,7 @@ const postFolder = async (parentFolderid, folder, token) => {
     `${backendUrl + "/folder/"+ parentFolderid}`,
     {
       method: "post",
+      mode: 'cors',
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/x-www-form-urlencoded",
@@ -137,6 +144,7 @@ const renameFolder = async (parentFolderId, folderId, newName, token) => {
     `${backendUrl+"/folder/"}${parentFolderId}/${folderId}`,
     {
       method: "put",
+      mode: 'cors',
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/x-www-form-urlencoded",
@@ -154,6 +162,7 @@ const renameFolder = async (parentFolderId, folderId, newName, token) => {
 const deleteFolder = async (folderId, token) => {
   const response = await fetch(`${backendUrl + "/folder/" + folderId}`, {
     method: "delete",
+    mode: 'cors',
     headers: {
       Authorization: `Bearer ${token}`,
     },
