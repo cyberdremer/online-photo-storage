@@ -14,6 +14,7 @@ const app = express();
 const corsOptions = {
   origin: process.env.ORIGIN_URL,
   methods: ["GET", "POST", "DELETE", "PUT"],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 };
 // const httpsServer = https.createServer(credentials, app);
