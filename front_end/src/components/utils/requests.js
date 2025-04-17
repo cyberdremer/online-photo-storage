@@ -10,7 +10,6 @@ const formPostRequest = async (form, url) => {
     method: "post",
     mode: 'cors',
     body: query,
-    credentials: "true",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
@@ -26,7 +25,7 @@ const getItemsRequest = async (form, url, token) => {
   const response = await fetch(url, {
     method: "get",
     mode: 'cors',
-    credentials: "true",
+  
     headers: {
       Accept: "application/json",
     },
@@ -43,7 +42,7 @@ const deleteFile = async (fileId, token) => {
   const response = await fetch(`${backendUrl + "/file/" + fileId}`, {
     method: "delete",
     mode: 'cors',
-    credentials: "true",
+
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -64,7 +63,7 @@ const postFile = async (folderId, file, token) => {
     {
       method: "post",
       mode: 'cors',
-      credentials: "true",
+ 
 
       headers: {
         Authorization: `Bearer ${token}`,
@@ -85,7 +84,7 @@ const renameFile = async (fileId, form, token) => {
   const response = await fetch(`${backendUrl + "/file/"+ fileId}`, {
     method: "put",
     mode: 'cors',
-    credentials: "true",
+
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/x-www-form-urlencoded",
@@ -105,7 +104,7 @@ const downloadFile = async (fileId, token) => {
   const response = await fetch(`${backendUrl + "/file/" + fileId}`, {
     method: "get",
     mode: 'cors',
-    credentials: "true",
+  
 
     headers: {
       Authorization: `Bearer ${token}`,
@@ -130,7 +129,7 @@ const postFolder = async (parentFolderid, folder, token) => {
     {
       method: "post",
       mode: 'cors',
-      credentials: "true",
+
    
       headers: {
         Authorization: `Bearer ${token}`,
@@ -155,7 +154,7 @@ const renameFolder = async (parentFolderId, folderId, newName, token) => {
     {
       method: "put",
       mode: 'cors',
-      credentials: "true",
+    
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/x-www-form-urlencoded",
@@ -174,7 +173,7 @@ const deleteFolder = async (folderId, token) => {
   const response = await fetch(`${backendUrl + "/folder/" + folderId}`, {
     method: "delete",
     mode: 'cors',
-    credentials: "true",
+
     headers: {
       Authorization: `Bearer ${token}`,
     },
