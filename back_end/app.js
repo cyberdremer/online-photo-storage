@@ -15,14 +15,13 @@ const corsOptions = {
   origin: process.env.ORIGIN_URL,
   methods: ["GET", "POST", "DELETE", "PUT"],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
 };
 // const httpsServer = https.createServer(credentials, app);
-
-app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(
   cors(corsOptions)
 );
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
+
 // app.use(redirectHttpToHttps);
 
 app.use(topLevelRoute);
