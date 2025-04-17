@@ -15,7 +15,7 @@ const app = express();
 // const httpsServer = https.createServer(credentials, app);
 
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
-app.use(cors({ exposedHeaders: "Access-Control-Expose-Headers" }));
+app.use(cors({ origin: process.env.ORIGIN_URL }));
 // app.use(redirectHttpToHttps);
 
 app.use(topLevelRoute);
