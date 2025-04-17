@@ -1,4 +1,5 @@
 const { Router } = require("express");
+
 const fileRoute = Router();
 const {
   uploadFile,
@@ -11,6 +12,5 @@ fileRoute.delete("/:fileId", deleteFile);
 fileRoute.get("/:fileId", downloadFile);
 fileRoute.put("/:folderId?/:fileId", updateFileName);
 fileRoute.post("/:folderId?", uploadFile);
-
 
 module.exports = fileRoute;
